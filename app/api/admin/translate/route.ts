@@ -58,7 +58,8 @@ Rules:
 
     return NextResponse.json(result);
   } catch (err) {
-    console.error('POST /api/admin/translate error:', err);
-    return NextResponse.json({ error: 'Çeviri sırasında hata oluştu.' }, { status: 500 });
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error('POST /api/admin/translate error:', msg);
+    return NextResponse.json({ error: msg }, { status: 500 });
   }
 }
