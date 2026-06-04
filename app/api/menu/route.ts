@@ -35,6 +35,7 @@ export async function POST(req: NextRequest) {
       category,
       name: name.trim(),
       description: (description ?? '').trim(),
+      ...(body.descriptions ? { descriptions: body.descriptions } : {}),
       price: price.trim(),
       special: Boolean(special),
     };

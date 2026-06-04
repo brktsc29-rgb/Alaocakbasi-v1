@@ -29,6 +29,7 @@ export async function PUT(
       category: body.category ?? items[idx].category,
       name: (body.name ?? items[idx].name).trim(),
       description: (body.description ?? items[idx].description).trim(),
+      descriptions: body.descriptions !== undefined ? body.descriptions : items[idx].descriptions,
       price: (body.price ?? items[idx].price).trim(),
       special: body.special !== undefined ? Boolean(body.special) : items[idx].special,
     };

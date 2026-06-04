@@ -10,6 +10,7 @@ interface MenuItem {
   category: 'baslangic' | 'ana' | 'tatli' | 'icecek';
   name: string;
   description: string;
+  descriptions?: Record<string, string>;
   price: string;
   special: boolean;
 }
@@ -161,12 +162,25 @@ export default function AdminPage() {
     setSaving(true);
     setFormError('');
     try {
+      // Auto-translate description to all 6 locales before saving
+      let descriptions: Record<string, string> | undefined;
+      if (form.description.trim()) {
+        try {
+          const tr = await fetch('/api/admin/translate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: form.description }),
+          });
+          if (tr.ok) descriptions = await tr.json();
+        } catch { /* proceed without translations if API unavailable */ }
+      }
+
       const url = editItem ? `/api/menu/${editItem.id}` : '/api/menu';
       const method = editItem ? 'PUT' : 'POST';
       const r = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, descriptions }),
       });
       if (!r.ok) {
         let msg = 'Kayıt sırasında bir hata oluştu.';

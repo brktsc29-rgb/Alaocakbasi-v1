@@ -7,6 +7,7 @@ export interface MenuItem {
   category: 'baslangic' | 'ana' | 'tatli' | 'icecek';
   name: string;
   description: string;
+  descriptions?: Record<string, string>;
   price: string;
   special: boolean;
 }

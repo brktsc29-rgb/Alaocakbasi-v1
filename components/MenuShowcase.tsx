@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, useCallback } from 'react';
+import { useParams } from 'next/navigation';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -15,12 +16,15 @@ interface MenuItem {
   category: Category;
   name: string;
   description: string;
+  descriptions?: Record<string, string>;
   price: string;
   special: boolean;
 }
 
 export default function MenuShowcase() {
   const t = useT();
+  const params = useParams();
+  const locale = typeof params?.locale === 'string' ? params.locale : 'tr';
   const [active, setActive] = useState<Category>('baslangic');
   const [items, setItems] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -139,7 +143,7 @@ export default function MenuShowcase() {
                     <div className="flex items-baseline gap-6 shrink-0">
                       {item.description && (
                         <p className="text-luxury-cream/30 text-xs font-inter hidden md:block max-w-[260px] text-right">
-                          {item.description}
+                          {item.descriptions?.[locale] ?? item.description}
                         </p>
                       )}
                       <span className="font-instrument text-luxury-gold text-lg whitespace-nowrap">{item.price}</span>
@@ -148,7 +152,7 @@ export default function MenuShowcase() {
                   {/* Description below name — mobile only */}
                   {item.description && (
                     <p className="md:hidden text-luxury-cream/30 text-xs font-inter mt-1.5 pl-4 leading-relaxed">
-                      {item.description}
+                      {item.descriptions?.[locale] ?? item.description}
                     </p>
                   )}
                 </motion.div>
