@@ -254,7 +254,7 @@ export default function Reservation() {
         {/* Contact alternatives */}
         <div className="grid md:grid-cols-3 gap-8 mt-12 text-center">
           {[
-            { label: 'Telefon', value: '+90 (212) 555 00 00' },
+            { label: 'Telefon', value: '+90 (242) 555 00 00' },
             { label: 'E-posta', value: 'rezervasyon@alaocakbasi.com' },
             { label: 'Çalışma Saatleri', value: 'Pzt–Paz · 19:00 – 00:00' },
           ].map((item) => (

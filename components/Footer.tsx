@@ -64,15 +64,15 @@ export default function Footer() {
             </p>
             <div className="space-y-3">
               <p className="text-luxury-cream/40 text-xs font-inter font-light">
-                +90 (212) 555 00 00
+                +90 (242) 555 00 00
               </p>
               <p className="text-luxury-cream/40 text-xs font-inter font-light">
                 info@alaocakbasi.com
               </p>
               <p className="text-luxury-cream/40 text-xs font-inter font-light leading-relaxed">
-                Abdi İpekçi Cad. No:42
+                1539. Sk. No:4, Şirinyalı
                 <br />
-                Nişantaşı, İstanbul
+                Muratpaşa, Antalya 07160
               </p>
             </div>
 
@@ -105,7 +105,7 @@ export default function Footer() {
             © {new Date().getFullYear()} ALA Ocakbaşı · Tüm Hakları Saklıdır
           </p>
           <p className="text-luxury-cream/15 text-[10px] tracking-wider uppercase font-inter">
-            Fine Dining · Istanbul · Turkey
+            Fine Dining · Antalya · Turkey
           </p>
           <div className="flex gap-6">
             <a

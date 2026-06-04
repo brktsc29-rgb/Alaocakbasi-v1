@@ -176,9 +176,9 @@ export default function Story() {
 
           <div className="story-body space-y-5">
             <p className="text-luxury-cream/60 font-inter font-light leading-relaxed text-sm md:text-base opacity-0">
-              ALA Ocakbaşı, 2010 yılında İstanbul&apos;un kalbinde, Akdeniz mutfağının
-              en saf halini sunma hayaliyle kapılarını açtı. Her yemekte bir hikaye,
-              her ateşte bir sanat gizli.
+              ALA Ocakbaşı, Antalya&apos;nın eşsiz Akdeniz iklimiyle bütünleşen
+              Şirinyalı&apos;da, Akdeniz mutfağının en saf halini sunma hayaliyle
+              kapılarını açtı. Her yemekte bir hikaye, her ateşte bir sanat gizli.
             </p>
             <p className="text-luxury-cream/60 font-inter font-light leading-relaxed text-sm md:text-base opacity-0">
               Kökleri Adana&apos;ya uzanan şef Mehmet Ali Öztürk, nesiller boyu aktarılan
@@ -187,9 +187,9 @@ export default function Story() {
               ve sanatsal sunum; her akşam yeni bir şaheser doğuruyor.
             </p>
             <p className="text-luxury-cream/60 font-inter font-light leading-relaxed text-sm md:text-base opacity-0">
-              Mekan; ham beton, koyu meşe ve altın vurguların bir senfonisi.
-              Açık mutfak konseptiyle misafirler, şefin elinden çıkan her tabağı
-              yakından takip edebilir.
+              Antalya&apos;nın sıcak Akdeniz ruhuyla şekillenen mekan; ham beton,
+              koyu meşe ve altın vurguların bir senfonisi. Açık mutfak konseptiyle
+              misafirler, şefin elinden çıkan her tabağı yakından takip edebilir.
             </p>
           </div>
 

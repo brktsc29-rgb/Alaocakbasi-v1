@@ -205,7 +205,7 @@ export default function Hero() {
       <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 w-full">
         {/* Eyebrow */}
         <p className="hero-eyebrow opacity-0 text-luxury-gold text-[10px] tracking-[0.4em] uppercase mb-10 font-inter font-light">
-          Est. 2010 · Istanbul · Türkiye
+          Şirinyalı · Antalya · Türkiye
         </p>
 
         {/* Main Title */}
@@ -291,7 +291,7 @@ export default function Hero() {
       </div>
       <div className="absolute bottom-8 right-8 hidden md:block">
         <p className="text-luxury-cream/20 text-[9px] tracking-[0.3em] uppercase font-inter -rotate-90 origin-bottom-right translate-y-[-100%]">
-          Açık Ateş · Open Fire
+          Muratpaşa · Antalya
         </p>
       </div>
     </section>

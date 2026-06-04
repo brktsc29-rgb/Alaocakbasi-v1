@@ -11,12 +11,12 @@ const info = [
   {
     icon: MapPin,
     label: 'Adres',
-    value: 'Nişantaşı Mah. Abdi İpekçi Cad. No:42\nŞişli, İstanbul 34367',
+    value: 'Şirinyalı Mah. 1539. Sk. No:4\nMuratpaşa, Antalya 07160',
   },
   {
     icon: Phone,
     label: 'Telefon',
-    value: '+90 (212) 555 00 00',
+    value: '+90 (242) 555 00 00',
   },
   {
     icon: Mail,
@@ -127,7 +127,7 @@ export default function Location() {
             <div className="relative w-full h-full min-h-[400px] overflow-hidden border border-luxury-gold/20">
               <iframe
                 title="ALA Ocakbaşı Konum"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=28.97,41.04,29.00,41.06&layer=mapnik&marker=41.050,28.984"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=30.742,36.868,30.758,36.878&layer=mapnik&marker=36.8730,30.7500"
                 width="100%"
                 height="100%"
                 style={{
@@ -154,10 +154,10 @@ export default function Location() {
                 <MapPin size={14} className="text-luxury-gold shrink-0" />
                 <div>
                   <p className="text-luxury-cream/80 text-sm font-inter font-light">
-                    Abdi İpekçi Cad. No:42, Nişantaşı
+                    1539. Sk. No:4, Şirinyalı
                   </p>
                   <p className="text-luxury-cream/40 text-[10px] tracking-widest uppercase font-inter mt-0.5">
-                    Şişli · İstanbul
+                    Muratpaşa · Antalya
                   </p>
                 </div>
               </div>

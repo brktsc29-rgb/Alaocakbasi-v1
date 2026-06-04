@@ -20,8 +20,8 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "ALA Ocakbaşı — Akdeniz'in Kalbinde Ateşin ve Lezzetin Buluştuğu Yer",
   description:
-    'İstanbul\'un kalbinde, Akdeniz mutfağının en seçkin lezzetlerini sunan ALA Ocakbaşı. Açık ateş üzerinde pişirilen imza yemekler, özel şarap koleksiyonu ve eşsiz bir deneyim.',
-  keywords: 'ALA Ocakbaşı, İstanbul restoran, Akdeniz mutfağı, fine dining, kebap, ocakbaşı, lüks restoran',
+    "Antalya Şirinyalı'nda, Akdeniz mutfağının en seçkin lezzetlerini sunan ALA Ocakbaşı. Açık ateş üzerinde pişirilen imza yemekler, özel şarap koleksiyonu ve eşsiz bir deneyim.",
+  keywords: 'ALA Ocakbaşı, Antalya restoran, Akdeniz mutfağı, fine dining, kebap, ocakbaşı, lüks restoran, Muratpaşa',
   openGraph: {
     title: 'ALA Ocakbaşı',
     description: 'Akdeniz\'in Kalbinde Ateşin ve Lezzetin Buluştuğu Yer',
