@@ -17,12 +17,15 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
 
     items[idx] = {
       ...items[idx],
-      name:        body.name        !== undefined ? body.name.trim()        : items[idx].name,
-      price:       body.price       !== undefined ? body.price.trim()       : items[idx].price,
-      subtitle:    body.subtitle    !== undefined ? body.subtitle.trim()    : items[idx].subtitle,
-      description: body.description !== undefined ? body.description.trim() : items[idx].description,
-      tag:         body.tag         !== undefined ? body.tag.trim()         : items[idx].tag,
-      image:       body.image       !== undefined ? body.image.trim()       : items[idx].image,
+      name:         body.name         !== undefined ? body.name.trim()         : items[idx].name,
+      price:        body.price        !== undefined ? body.price.trim()        : items[idx].price,
+      subtitle:     body.subtitle     !== undefined ? body.subtitle.trim()     : items[idx].subtitle,
+      description:  body.description  !== undefined ? body.description.trim()  : items[idx].description,
+      tag:          body.tag          !== undefined ? body.tag.trim()          : items[idx].tag,
+      image:        body.image        !== undefined ? body.image.trim()        : items[idx].image,
+      subtitles:    body.subtitles    !== undefined ? body.subtitles    : items[idx].subtitles,
+      descriptions: body.descriptions !== undefined ? body.descriptions : items[idx].descriptions,
+      tags:         body.tags         !== undefined ? body.tags         : items[idx].tags,
     };
 
     await writeSignature(items);

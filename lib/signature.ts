@@ -10,6 +10,9 @@ export interface SignatureDish {
   description: string;
   tag: string;
   image: string;
+  subtitles?: Record<string, string>;
+  descriptions?: Record<string, string>;
+  tags?: Record<string, string>;
 }
 
 const DATA_FILE = path.join(process.cwd(), 'data', 'signature.json');

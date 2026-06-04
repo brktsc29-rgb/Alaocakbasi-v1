@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useT } from '@/contexts/I18nContext';
+import { useParams } from 'next/navigation';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,12 +18,17 @@ interface SignatureDish {
   description: string;
   tag: string;
   image: string;
+  subtitles?: Record<string, string>;
+  descriptions?: Record<string, string>;
+  tags?: Record<string, string>;
 }
 
 const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop';
 
 export default function SignatureDishes() {
   const t = useT();
+  const params = useParams();
+  const locale = typeof params?.locale === 'string' ? params.locale : 'tr';
   const sectionRef = useRef<HTMLElement>(null);
   const [dishes, setDishes] = useState<SignatureDish[]>([]);
 
@@ -81,19 +87,25 @@ export default function SignatureDishes() {
                 <div className="dish-card-overlay absolute inset-0" />
                 {dish.tag && (
                   <div className="absolute top-4 left-4 glass px-3 py-1">
-                    <span className="text-luxury-gold text-[9px] tracking-[0.3em] uppercase font-inter">{dish.tag}</span>
+                    <span className="text-luxury-gold text-[9px] tracking-[0.3em] uppercase font-inter">
+                      {dish.tags?.[locale] ?? dish.tag}
+                    </span>
                   </div>
                 )}
                 <div className="absolute inset-0 border border-luxury-gold/0 group-hover:border-luxury-gold/40 transition-all duration-500" />
               </div>
               <div className="p-6">
                 {dish.subtitle && (
-                  <p className="text-luxury-gold/60 text-[10px] tracking-[0.3em] uppercase font-inter mb-2">{dish.subtitle}</p>
+                  <p className="text-luxury-gold/60 text-[10px] tracking-[0.3em] uppercase font-inter mb-2">
+                    {dish.subtitles?.[locale] ?? dish.subtitle}
+                  </p>
                 )}
                 <h3 className="font-instrument text-luxury-cream text-2xl leading-tight mb-3 group-hover:text-luxury-gold transition-colors duration-300">
                   {dish.name}
                 </h3>
-                <p className="text-luxury-cream/40 text-xs font-inter font-light leading-relaxed line-clamp-3">{dish.description}</p>
+                <p className="text-luxury-cream/40 text-xs font-inter font-light leading-relaxed line-clamp-3">
+                  {dish.descriptions?.[locale] ?? dish.description}
+                </p>
                 <div className="flex items-center justify-between mt-5 pt-5 border-t border-luxury-gold/10">
                   <span className="font-instrument text-luxury-gold text-xl">{dish.price}</span>
                   <span className="text-luxury-cream/30 text-[9px] tracking-[0.2em] uppercase font-inter group-hover:text-luxury-gold/50 transition-colors duration-300">

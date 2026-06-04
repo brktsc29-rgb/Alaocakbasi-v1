@@ -409,9 +409,45 @@ export default function AdminPage() {
     setSigSaving(true);
     setSigFormError('');
     try {
+      // Auto-translate subtitle, description, tag in one API call
+      let subtitles: Record<string, string> | undefined;
+      let descriptions: Record<string, string> | undefined;
+      let tags: Record<string, string> | undefined;
+      let translateNote = '';
+
+      const fieldsToTranslate: Record<string, string> = {};
+      if (sigForm.subtitle.trim())     fieldsToTranslate.subtitle     = sigForm.subtitle;
+      if (sigForm.description.trim())  fieldsToTranslate.description  = sigForm.description;
+      if (sigForm.tag.trim())          fieldsToTranslate.tag          = sigForm.tag;
+
+      if (Object.keys(fieldsToTranslate).length > 0) {
+        try {
+          const tr = await fetch('/api/admin/translate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ fields: fieldsToTranslate }),
+          });
+          if (tr.ok) {
+            const result = await tr.json() as Record<string, Record<string, string>>;
+            if (result.subtitle)    subtitles    = result.subtitle;
+            if (result.description) descriptions = result.description;
+            if (result.tag)         tags         = result.tag;
+            translateNote = ' · 6 dile çevrildi';
+          } else {
+            const body = await tr.json().catch(() => ({})) as { error?: string };
+            translateNote = body.error?.includes('ANTHROPIC_API_KEY')
+              ? ' · Çeviri yok (API key eksik)'
+              : ` · Çeviri başarısız: ${body.error ?? tr.status}`;
+          }
+        } catch (err) {
+          translateNote = ` · Çeviri başarısız: ${err instanceof Error ? err.message : 'ağ hatası'}`;
+        }
+      }
+
+      const payload = { ...sigForm, subtitles, descriptions, tags };
       const url = editSig ? `/api/signature/${editSig.id}` : '/api/signature';
       const method = editSig ? 'PUT' : 'POST';
-      const r = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(sigForm) });
+      const r = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
       if (!r.ok) {
         let msg = 'Kayıt sırasında bir hata oluştu.';
         try { msg = (await r.json()).error ?? msg; } catch { /* non-JSON */ }
@@ -419,7 +455,7 @@ export default function AdminPage() {
       }
       await fetchSignature();
       closeSigModal();
-      showToast(editSig ? 'Güncellendi.' : 'Eklendi.');
+      showToast(`${editSig ? 'Güncellendi.' : 'Eklendi.'}${translateNote}`);
     } catch (err) {
       setSigFormError(err instanceof Error ? err.message : 'Bir hata oluştu.');
     } finally {

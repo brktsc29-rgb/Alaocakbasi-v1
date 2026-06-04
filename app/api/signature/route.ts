@@ -35,6 +35,9 @@ export async function POST(req: NextRequest) {
       description: (description ?? '').trim(),
       tag: (tag ?? '').trim(),
       image: (image ?? '').trim(),
+      ...(body.subtitles    ? { subtitles: body.subtitles }       : {}),
+      ...(body.descriptions ? { descriptions: body.descriptions } : {}),
+      ...(body.tags         ? { tags: body.tags }                 : {}),
     };
 
     items.push(newItem);
