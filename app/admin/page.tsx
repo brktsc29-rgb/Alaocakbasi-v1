@@ -121,7 +121,11 @@ export default function AdminPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
-      if (!r.ok) throw new Error((await r.json()).error ?? 'Hata');
+      if (!r.ok) {
+        let msg = 'Kayıt sırasında bir hata oluştu.';
+        try { msg = (await r.json()).error ?? msg; } catch { /* non-JSON response */ }
+        throw new Error(msg);
+      }
       await fetchItems();
       closeModal();
       showToast(editItem ? 'Ürün güncellendi.' : 'Ürün eklendi.');

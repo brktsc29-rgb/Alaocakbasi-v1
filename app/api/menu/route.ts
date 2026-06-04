@@ -8,8 +8,12 @@ function isAdmin(req: NextRequest): boolean {
 }
 
 export async function GET() {
-  const items = readMenu();
-  return NextResponse.json(items);
+  try {
+    const items = readMenu();
+    return NextResponse.json(items);
+  } catch {
+    return NextResponse.json({ error: 'Menü yüklenemedi.' }, { status: 500 });
+  }
 }
 
 export async function POST(req: NextRequest) {
@@ -17,25 +21,30 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Yetkisiz.' }, { status: 401 });
   }
 
-  const body = await req.json();
-  const { category, name, description, price, special } = body;
+  try {
+    const body = await req.json();
+    const { category, name, description, price, special } = body;
 
-  if (!category || !name || !price) {
-    return NextResponse.json({ error: 'Eksik alan.' }, { status: 400 });
+    if (!category || !name || !price) {
+      return NextResponse.json({ error: 'Eksik alan.' }, { status: 400 });
+    }
+
+    const items = readMenu();
+    const newItem = {
+      id: generateId(),
+      category,
+      name: name.trim(),
+      description: (description ?? '').trim(),
+      price: price.trim(),
+      special: Boolean(special),
+    };
+
+    items.push(newItem);
+    writeMenu(items);
+
+    return NextResponse.json(newItem, { status: 201 });
+  } catch (err) {
+    console.error('POST /api/menu error:', err);
+    return NextResponse.json({ error: 'Ürün eklenirken hata oluştu.' }, { status: 500 });
   }
-
-  const items = readMenu();
-  const newItem = {
-    id: generateId(),
-    category,
-    name: name.trim(),
-    description: (description ?? '').trim(),
-    price: price.trim(),
-    special: Boolean(special),
-  };
-
-  items.push(newItem);
-  writeMenu(items);
-
-  return NextResponse.json(newItem, { status: 201 });
 }
