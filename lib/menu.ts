@@ -60,6 +60,12 @@ export async function readMenu(): Promise<MenuItem[]> {
 
 export async function writeMenu(items: MenuItem[]): Promise<void> {
   if (!process.env.UPSTASH_REDIS_REST_URL) {
+    // On Vercel the filesystem is read-only — writes require Redis.
+    if (process.env.VERCEL) {
+      throw new Error(
+        'Redis yapılandırılmamış. Vercel → Settings → Environment Variables bölümüne UPSTASH_REDIS_REST_URL ve UPSTASH_REDIS_REST_TOKEN ekleyip yeniden deploy edin.'
+      );
+    }
     writeToFile(items);
     return;
   }
