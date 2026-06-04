@@ -103,7 +103,7 @@ export default function AdminLogin() {
         </div>
 
         <p className="text-center text-luxury-cream/15 text-[10px] tracking-widest uppercase font-inter mt-8">
-          Varsayılan şifre: ala2024
+          Varsayılan şifre: admin123
         </p>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? 'ala2024';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? 'admin123';
 const SECRET = process.env.AUTH_SECRET ?? 'ala-ocakbasi-gizli-2024';
 
 export function createToken(): string {
