@@ -50,7 +50,7 @@ export default function AdminLogin() {
         {/* Logo */}
         <div className="text-center mb-12">
           <span className="font-instrument italic text-luxury-gold text-4xl tracking-wider">
-            ALA
+            ÂLÂ
           </span>
           <span className="mx-3 text-luxury-gold/30">|</span>
           <span className="font-instrument text-luxury-cream/60 text-base tracking-[0.3em] uppercase">

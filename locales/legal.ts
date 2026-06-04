@@ -78,7 +78,7 @@ const tr: LegalContent = {
     sections: [
       {
         heading: '1. Veri Sorumlusu',
-        body: '6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") kapsamında kişisel verileriniz, ALA Ocakbaşı (Şirinyalı Mah. 1539. Sk. No:4, 07160 Muratpaşa/Antalya) tarafından işlenmektedir. İletişim: alaocakbasiantalya@gmail.com',
+        body: '6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") kapsamında kişisel verileriniz, ÂLÂ Ocakbaşı (Şirinyalı Mah. 1539. Sk. No:4, 07160 Muratpaşa/Antalya) tarafından işlenmektedir. İletişim: alaocakbasiantalya@gmail.com',
       },
       {
         heading: '2. Toplanan Kişisel Veriler',
@@ -146,19 +146,19 @@ const tr: LegalContent = {
       },
       {
         heading: '2. Hizmet Tanımı',
-        body: 'ALA Ocakbaşı web sitesi; restoran tanıtımı, menü bilgisi, galeri ve rezervasyon talebi iletimi amacıyla hizmet vermektedir. Rezervasyon formunun doldurulması, kesin rezervasyon anlamına gelmemekte; işletme tarafından onaylanması gerekmektedir.',
+        body: 'ÂLÂ Ocakbaşı web sitesi; restoran tanıtımı, menü bilgisi, galeri ve rezervasyon talebi iletimi amacıyla hizmet vermektedir. Rezervasyon formunun doldurulması, kesin rezervasyon anlamına gelmemekte; işletme tarafından onaylanması gerekmektedir.',
       },
       {
         heading: '3. Fikri Mülkiyet',
-        body: "Web sitesindeki tüm içerik, tasarım, logo, metin ve görseller ALA Ocakbaşı'na aittir. İzinsiz kopyalanması, dağıtılması veya ticari amaçla kullanılması yasaktır.",
+        body: "Web sitesindeki tüm içerik, tasarım, logo, metin ve görseller ÂLÂ Ocakbaşı'na aittir. İzinsiz kopyalanması, dağıtılması veya ticari amaçla kullanılması yasaktır.",
       },
       {
         heading: '4. Sorumluluk Sınırlaması',
-        body: 'Web sitesindeki bilgiler "olduğu gibi" sunulmaktadır. Menü içerikleri ve fiyatlar önceden haber verilmeksizin değiştirilebilir. ALA Ocakbaşı; teknik kesintilerden, veri kayıplarından veya yanlış bilgilerden doğan zararlar için sorumluluk kabul etmemektedir.',
+        body: 'Web sitesindeki bilgiler "olduğu gibi" sunulmaktadır. Menü içerikleri ve fiyatlar önceden haber verilmeksizin değiştirilebilir. ÂLÂ Ocakbaşı; teknik kesintilerden, veri kayıplarından veya yanlış bilgilerden doğan zararlar için sorumluluk kabul etmemektedir.',
       },
       {
         heading: '5. Dış Bağlantılar',
-        body: 'Web sitemiz üçüncü taraf platformlara (Instagram, Facebook, Google Haritalar vb.) bağlantılar içerebilir. Bu platformların içerik ve gizlilik politikalarından ALA Ocakbaşı sorumlu değildir.',
+        body: 'Web sitemiz üçüncü taraf platformlara (Instagram, Facebook, Google Haritalar vb.) bağlantılar içerebilir. Bu platformların içerik ve gizlilik politikalarından ÂLÂ Ocakbaşı sorumlu değildir.',
       },
       {
         heading: '6. Rezervasyon Koşulları',
@@ -179,7 +179,7 @@ const tr: LegalContent = {
       },
       {
         heading: '9. Değişiklikler',
-        body: 'ALA Ocakbaşı, bu koşulları önceden haber vermeksizin güncelleme hakkını saklı tutar. Güncel koşullar her zaman bu sayfada yayımlanacaktır.',
+        body: 'ÂLÂ Ocakbaşı, bu koşulları önceden haber vermeksizin güncelleme hakkını saklı tutar. Güncel koşullar her zaman bu sayfada yayımlanacaktır.',
       },
       {
         heading: '10. İletişim',
@@ -264,7 +264,7 @@ const en: LegalContent = {
     sections: [
       {
         heading: '1. Data Controller',
-        body: 'Your personal data is processed by ALA Ocakbaşı (Şirinyalı Mah. 1539. Sk. No:4, 07160 Muratpaşa/Antalya, Turkey) in accordance with applicable data protection legislation. Contact: alaocakbasiantalya@gmail.com',
+        body: 'Your personal data is processed by ÂLÂ Ocakbaşı (Şirinyalı Mah. 1539. Sk. No:4, 07160 Muratpaşa/Antalya, Turkey) in accordance with applicable data protection legislation. Contact: alaocakbasiantalya@gmail.com',
       },
       {
         heading: '2. Personal Data Collected',
@@ -332,19 +332,19 @@ const en: LegalContent = {
       },
       {
         heading: '2. Service Description',
-        body: 'The ALA Ocakbaşı website provides restaurant information, menu details, a gallery and the ability to submit reservation requests. Submitting the reservation form does not constitute a confirmed reservation; confirmation by the establishment is required.',
+        body: 'The ÂLÂ Ocakbaşı website provides restaurant information, menu details, a gallery and the ability to submit reservation requests. Submitting the reservation form does not constitute a confirmed reservation; confirmation by the establishment is required.',
       },
       {
         heading: '3. Intellectual Property',
-        body: 'All content, design, logos, text and images on the website are the property of ALA Ocakbaşı. Copying, distributing or using them for commercial purposes without permission is prohibited.',
+        body: 'All content, design, logos, text and images on the website are the property of ÂLÂ Ocakbaşı. Copying, distributing or using them for commercial purposes without permission is prohibited.',
       },
       {
         heading: '4. Limitation of Liability',
-        body: 'Information on this website is provided "as is". Menu contents and prices may change without prior notice. ALA Ocakbaşı accepts no liability for damages arising from technical interruptions, data loss or inaccurate information.',
+        body: 'Information on this website is provided "as is". Menu contents and prices may change without prior notice. ÂLÂ Ocakbaşı accepts no liability for damages arising from technical interruptions, data loss or inaccurate information.',
       },
       {
         heading: '5. External Links',
-        body: 'Our website may contain links to third-party platforms (Instagram, Facebook, Google Maps, etc.). ALA Ocakbaşı is not responsible for the content or privacy practices of these platforms.',
+        body: 'Our website may contain links to third-party platforms (Instagram, Facebook, Google Maps, etc.). ÂLÂ Ocakbaşı is not responsible for the content or privacy practices of these platforms.',
       },
       {
         heading: '6. Reservation Conditions',
@@ -365,7 +365,7 @@ const en: LegalContent = {
       },
       {
         heading: '9. Changes',
-        body: 'ALA Ocakbaşı reserves the right to update these terms without prior notice. The current terms will always be published on this page.',
+        body: 'ÂLÂ Ocakbaşı reserves the right to update these terms without prior notice. The current terms will always be published on this page.',
       },
       {
         heading: '10. Contact',
@@ -448,7 +448,7 @@ const de: LegalContent = {
     cookiePolicyLabel: 'Cookie-Richtlinie',
     cookiePolicyText: 'Unsere Website verwendet technische Cookies und Analyse-Cookies. Für weitere Informationen lesen Sie bitte unsere',
     sections: [
-      { heading: '1. Verantwortlicher', body: 'Ihre personenbezogenen Daten werden von ALA Ocakbaşı (Şirinyalı Mah. 1539. Sk. No:4, 07160 Muratpaşa/Antalya, Türkei) gemäß den geltenden Datenschutzvorschriften verarbeitet. Kontakt: alaocakbasiantalya@gmail.com' },
+      { heading: '1. Verantwortlicher', body: 'Ihre personenbezogenen Daten werden von ÂLÂ Ocakbaşı (Şirinyalı Mah. 1539. Sk. No:4, 07160 Muratpaşa/Antalya, Türkei) gemäß den geltenden Datenschutzvorschriften verarbeitet. Kontakt: alaocakbasiantalya@gmail.com' },
       { heading: '2. Erhobene Daten', body: 'Wir verarbeiten folgende personenbezogene Daten:', list: ['Vollständiger Name', 'E-Mail-Adresse', 'Telefonnummer', 'Reservierungsdatum, -uhrzeit und Personenanzahl', 'Besondere Wünsche und Notizen', 'Website-Besuchsdaten (über Cookies)'] },
       { heading: '3. Verarbeitungszwecke', body: 'Ihre Daten werden für folgende Zwecke verarbeitet:', list: ['Entgegennahme und Bestätigung von Reservierungsanfragen', 'Kommunikation mit Kunden', 'Verbesserung der Servicequalität', 'Erfüllung gesetzlicher Verpflichtungen', 'Website-Sicherheit und Leistungsanalyse'] },
       { heading: '4. Rechtsgrundlage', body: 'Die Verarbeitung erfolgt auf Grundlage der Vertragserfüllung, berechtigter Interessen und Einwilligung.' },
@@ -466,14 +466,14 @@ const de: LegalContent = {
     privacyLinkLabel: 'Datenschutzrichtlinie',
     sections: [
       { heading: '1. Akzeptanz', body: 'Durch den Besuch dieser Website (alaocakbasi.com) bestätigen Sie, dass Sie die folgenden Nutzungsbedingungen gelesen und akzeptiert haben.' },
-      { heading: '2. Leistungsbeschreibung', body: 'Die ALA Ocakbaşı-Website bietet Restaurantinformationen, Menüdetails, eine Galerie und die Möglichkeit, Reservierungsanfragen zu stellen.' },
-      { heading: '3. Geistiges Eigentum', body: 'Alle Inhalte, Designs, Logos, Texte und Bilder auf der Website sind Eigentum von ALA Ocakbaşı.' },
+      { heading: '2. Leistungsbeschreibung', body: 'Die ÂLÂ Ocakbaşı-Website bietet Restaurantinformationen, Menüdetails, eine Galerie und die Möglichkeit, Reservierungsanfragen zu stellen.' },
+      { heading: '3. Geistiges Eigentum', body: 'Alle Inhalte, Designs, Logos, Texte und Bilder auf der Website sind Eigentum von ÂLÂ Ocakbaşı.' },
       { heading: '4. Haftungsbeschränkung', body: 'Informationen auf dieser Website werden "wie besehen" bereitgestellt. Menüinhalte und Preise können sich ohne vorherige Ankündigung ändern.' },
-      { heading: '5. Externe Links', body: 'Unsere Website kann Links zu Drittanbieter-Plattformen enthalten. ALA Ocakbaşı ist nicht für deren Inhalte oder Datenschutzpraktiken verantwortlich.' },
+      { heading: '5. Externe Links', body: 'Unsere Website kann Links zu Drittanbieter-Plattformen enthalten. ÂLÂ Ocakbaşı ist nicht für deren Inhalte oder Datenschutzpraktiken verantwortlich.' },
       { heading: '6. Reservierungsbedingungen', list: ['Reservierungsanfragen werden per E-Mail bestätigt.', 'Unbestätigte Anfragen gelten nicht als gültige Reservierungen.', 'Stornierungen sind mindestens 2 Stunden im Voraus zu melden.', 'Gruppenreservierungen (8+ Personen) erfordern vorherige Kontaktaufnahme.'] },
       { heading: '7. Datenschutz', body: 'Für weitere Informationen zur Verarbeitung Ihrer personenbezogenen Daten lesen Sie bitte unsere Datenschutzrichtlinie.' },
       { heading: '8. Anwendbares Recht', body: 'Diese Bedingungen unterliegen dem türkischen Recht. Für Streitigkeiten sind die Gerichte in Antalya zuständig.' },
-      { heading: '9. Änderungen', body: 'ALA Ocakbaşı behält sich das Recht vor, diese Bedingungen ohne vorherige Ankündigung zu aktualisieren.' },
+      { heading: '9. Änderungen', body: 'ÂLÂ Ocakbaşı behält sich das Recht vor, diese Bedingungen ohne vorherige Ankündigung zu aktualisieren.' },
       { heading: '10. Kontakt', body: 'Bei Fragen: alaocakbasiantalya@gmail.com oder +90 532 175 67 07' },
     ],
   },
@@ -588,7 +588,7 @@ const ru: LegalContent = {
     cookiePolicyLabel: 'политику использования cookies',
     cookiePolicyText: 'Наш сайт использует технические и аналитические файлы cookie. Для получения подробной информации ознакомьтесь с нашей',
     sections: [
-      { heading: '1. Оператор данных', body: 'Ваши персональные данные обрабатываются компанией ALA Ocakbaşı (Şirinyalı, Анталья, Турция). Контакт: alaocakbasiantalya@gmail.com' },
+      { heading: '1. Оператор данных', body: 'Ваши персональные данные обрабатываются компанией ÂLÂ Ocakbaşı (Şirinyalı, Анталья, Турция). Контакт: alaocakbasiantalya@gmail.com' },
       { heading: '2. Собираемые данные', body: 'Мы обрабатываем следующие персональные данные:', list: ['Полное имя', 'Адрес электронной почты', 'Номер телефона', 'Дата бронирования и количество гостей', 'Особые пожелания и заметки', 'Данные посещения сайта (через cookies)'] },
       { heading: '3. Цели обработки', body: 'Ваши данные обрабатываются в следующих целях:', list: ['Приём и подтверждение запросов на бронирование', 'Связь с клиентами', 'Улучшение качества сервиса', 'Выполнение правовых обязательств', 'Безопасность сайта и анализ производительности'] },
       { heading: '4. Правовая основа', body: 'Обработка данных осуществляется на основе исполнения договора, законных интересов и согласия.' },
@@ -606,14 +606,14 @@ const ru: LegalContent = {
     privacyLinkLabel: 'Политику конфиденциальности',
     sections: [
       { heading: '1. Принятие', body: 'Посещая этот сайт, вы подтверждаете, что прочитали и согласились с настоящими условиями использования.' },
-      { heading: '2. Описание услуги', body: 'Сайт ALA Ocakbaşı предоставляет информацию о ресторане, меню, галерею и возможность отправки запросов на бронирование.' },
-      { heading: '3. Интеллектуальная собственность', body: 'Весь контент, дизайн, логотипы, тексты и изображения на сайте являются собственностью ALA Ocakbaşı.' },
+      { heading: '2. Описание услуги', body: 'Сайт ÂLÂ Ocakbaşı предоставляет информацию о ресторане, меню, галерею и возможность отправки запросов на бронирование.' },
+      { heading: '3. Интеллектуальная собственность', body: 'Весь контент, дизайн, логотипы, тексты и изображения на сайте являются собственностью ÂLÂ Ocakbaşı.' },
       { heading: '4. Ограничение ответственности', body: 'Информация на сайте предоставляется "как есть". Содержание меню и цены могут изменяться без предварительного уведомления.' },
-      { heading: '5. Внешние ссылки', body: 'Наш сайт может содержать ссылки на сторонние платформы. ALA Ocakbaşı не несёт ответственности за их контент.' },
+      { heading: '5. Внешние ссылки', body: 'Наш сайт может содержать ссылки на сторонние платформы. ÂLÂ Ocakbaşı не несёт ответственности за их контент.' },
       { heading: '6. Условия бронирования', list: ['Запросы на бронирование подтверждаются по электронной почте.', 'Неподтверждённые запросы не считаются действительными бронированиями.', 'Об отмене следует уведомить не менее чем за 2 часа.', 'Групповые бронирования (8+ гостей) требуют предварительного контакта.'] },
       { heading: '7. Защита данных', body: 'Для получения подробной информации об обработке ваших персональных данных ознакомьтесь с нашей Политикой конфиденциальности.' },
       { heading: '8. Применимое право', body: 'Настоящие условия регулируются законодательством Турецкой Республики. Для разрешения споров компетентны суды Антальи.' },
-      { heading: '9. Изменения', body: 'ALA Ocakbaşı оставляет за собой право обновлять настоящие условия без предварительного уведомления.' },
+      { heading: '9. Изменения', body: 'ÂLÂ Ocakbaşı оставляет за собой право обновлять настоящие условия без предварительного уведомления.' },
       { heading: '10. Контакт', body: 'По вопросам: alaocakbasiantalya@gmail.com или +90 532 175 67 07' },
     ],
   },
@@ -658,7 +658,7 @@ const fr: LegalContent = {
     cookiePolicyLabel: 'Politique de cookies',
     cookiePolicyText: 'Notre site utilise des cookies techniques et analytiques. Pour plus d\'informations, consultez notre',
     sections: [
-      { heading: '1. Responsable du traitement', body: 'Vos données personnelles sont traitées par ALA Ocakbaşı (Şirinyalı, Antalya, Turquie). Contact : alaocakbasiantalya@gmail.com' },
+      { heading: '1. Responsable du traitement', body: 'Vos données personnelles sont traitées par ÂLÂ Ocakbaşı (Şirinyalı, Antalya, Turquie). Contact : alaocakbasiantalya@gmail.com' },
       { heading: '2. Données collectées', body: 'Nous traitons les données personnelles suivantes :', list: ['Nom complet', 'Adresse e-mail', 'Numéro de téléphone', 'Date de réservation et nombre de convives', 'Demandes spéciales et notes', 'Données de visite du site (via cookies)'] },
       { heading: '3. Finalités du traitement', body: 'Vos données sont traitées aux fins suivantes :', list: ['Réception et confirmation des demandes de réservation', 'Communication avec les clients', 'Amélioration de la qualité du service', 'Respect des obligations légales', 'Sécurité du site et analyse des performances'] },
       { heading: '4. Base légale', body: 'Le traitement est effectué sur la base de l\'exécution du contrat, des intérêts légitimes et du consentement.' },
@@ -676,14 +676,14 @@ const fr: LegalContent = {
     privacyLinkLabel: 'Politique de confidentialité',
     sections: [
       { heading: '1. Acceptation', body: 'En visitant ce site, vous confirmez avoir lu et accepté les présentes conditions d\'utilisation.' },
-      { heading: '2. Description du service', body: 'Le site ALA Ocakbaşı fournit des informations sur le restaurant, le menu, une galerie et la possibilité d\'envoyer des demandes de réservation.' },
-      { heading: '3. Propriété intellectuelle', body: 'Tous les contenus, designs, logos, textes et images du site appartiennent à ALA Ocakbaşı.' },
+      { heading: '2. Description du service', body: 'Le site ÂLÂ Ocakbaşı fournit des informations sur le restaurant, le menu, une galerie et la possibilité d\'envoyer des demandes de réservation.' },
+      { heading: '3. Propriété intellectuelle', body: 'Tous les contenus, designs, logos, textes et images du site appartiennent à ÂLÂ Ocakbaşı.' },
       { heading: '4. Limitation de responsabilité', body: 'Les informations sont fournies "en l\'état". Les contenus du menu et les prix peuvent changer sans préavis.' },
-      { heading: '5. Liens externes', body: 'Notre site peut contenir des liens vers des plateformes tierces. ALA Ocakbaşı n\'est pas responsable de leur contenu.' },
+      { heading: '5. Liens externes', body: 'Notre site peut contenir des liens vers des plateformes tierces. ÂLÂ Ocakbaşı n\'est pas responsable de leur contenu.' },
       { heading: '6. Conditions de réservation', list: ['Les demandes de réservation sont confirmées par e-mail.', 'Les demandes non confirmées ne constituent pas des réservations valides.', 'Les annulations doivent être notifiées au moins 2 heures à l\'avance.', 'Les réservations de groupe (8+ convives) nécessitent un contact préalable.'] },
       { heading: '7. Protection des données', body: 'Pour des informations détaillées sur le traitement de vos données, consultez notre Politique de confidentialité.' },
       { heading: '8. Droit applicable', body: 'Ces conditions sont régies par le droit turc. Les tribunaux d\'Antalya sont compétents pour tout litige.' },
-      { heading: '9. Modifications', body: 'ALA Ocakbaşı se réserve le droit de mettre à jour ces conditions sans préavis.' },
+      { heading: '9. Modifications', body: 'ÂLÂ Ocakbaşı se réserve le droit de mettre à jour ces conditions sans préavis.' },
       { heading: '10. Contact', body: 'Pour toute question : alaocakbasiantalya@gmail.com ou +90 532 175 67 07' },
     ],
   },

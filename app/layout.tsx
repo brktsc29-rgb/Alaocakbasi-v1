@@ -18,7 +18,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'ALA Ocakbaşı',
+  title: 'ÂLÂ Ocakbaşı',
   description: 'Fine Dining · Antalya',
 };
 

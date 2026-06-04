@@ -254,7 +254,7 @@ export default function AdminPage() {
       <header className="glass border-b border-luxury-gold/10 sticky top-0 z-40 px-6 py-4">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <span className="font-instrument italic text-luxury-gold text-2xl">ALA</span>
+            <span className="font-instrument italic text-luxury-gold text-2xl">ÂLÂ</span>
             <span className="w-px h-5 bg-luxury-gold/30" />
             <span className="font-instrument text-luxury-cream/50 text-sm tracking-[0.3em] uppercase">
               Admin

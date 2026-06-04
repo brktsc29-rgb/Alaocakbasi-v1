@@ -14,18 +14,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const t = getTranslations(locale);
   const titles: Record<string, string> = {
-    tr: 'ALA Ocakbaşı — Akdeniz\'in Kalbinde Ateşin ve Lezzetin Buluştuğu Yer',
-    en: 'ALA Ocakbaşı — Where Fire and Flavor Meet in the Heart of the Mediterranean',
-    de: 'ALA Ocakbaşı — Wo Feuer und Geschmack im Herzen des Mittelmeers aufeinandertreffen',
+    tr: 'ÂLÂ Ocakbaşı — Akdeniz\'in Kalbinde Ateşin ve Lezzetin Buluştuğu Yer',
+    en: 'ÂLÂ Ocakbaşı — Where Fire and Flavor Meet in the Heart of the Mediterranean',
+    de: 'ÂLÂ Ocakbaşı — Wo Feuer und Geschmack im Herzen des Mittelmeers aufeinandertreffen',
     ar: 'آلا أوجاق باشي — حيث تلتقي النار والنكهة في قلب البحر الأبيض المتوسط',
-    ru: 'ALA Ocakbaşı — Там, где огонь и вкус встречаются в сердце Средиземноморья',
-    fr: 'ALA Ocakbaşı — Là où le feu et la saveur se rencontrent au cœur de la Méditerranée',
+    ru: 'ÂLÂ Ocakbaşı — Там, где огонь и вкус встречаются в сердце Средиземноморья',
+    fr: 'ÂLÂ Ocakbaşı — Là où le feu et la saveur se rencontrent au cœur de la Méditerranée',
   };
   return {
     title: titles[locale] ?? titles['tr'],
     description: t.footer_tagline,
     openGraph: {
-      title: 'ALA Ocakbaşı',
+      title: 'ÂLÂ Ocakbaşı',
       description: t.hero_tagline,
       type: 'website',
     },

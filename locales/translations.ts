@@ -150,7 +150,7 @@ const tr: Translations = {
 
   story_eyebrow: 'Hikayemiz', story_h1: 'Ateşin', story_h2: 'Ustası,',
   story_h3: 'Lezzetin', story_h4: 'Mimarı',
-  story_body1: 'ALA Ocakbaşı, Antalya\'nın eşsiz Akdeniz iklimiyle bütünleşen Şirinyalı\'da, Akdeniz mutfağının en saf halini sunma hayaliyle kapılarını açtı. Her yemekte bir hikaye, her ateşte bir sanat gizli.',
+  story_body1: 'ÂLÂ Ocakbaşı, Antalya\'nın eşsiz Akdeniz iklimiyle bütünleşen Şirinyalı\'da, Akdeniz mutfağının en saf halini sunma hayaliyle kapılarını açtı. Her yemekte bir hikaye, her ateşte bir sanat gizli.',
   story_body2: 'Kökleri Adana\'ya uzanan şef Mehmet Ali Öztürk, nesiller boyu aktarılan ocak geleneğini çağdaş fine dining anlayışıyla birleştirerek benzersiz bir deneyim yaratıyor. Seçilmiş malzemeler, mükemmel pişirme teknikleri ve sanatsal sunum; her akşam yeni bir şaheser doğuruyor.',
   story_body3: 'Antalya\'nın sıcak Akdeniz ruhuyla şekillenen mekan; ham beton, koyu meşe ve altın vurguların bir senfonisi. Açık mutfak konseptiyle misafirler, şefin elinden çıkan her tabağı yakından takip edebilir.',
   story_founded: 'Kuruluş', stat_years: 'Yıl', stat_dishes: 'İmza Yemek',
@@ -223,7 +223,7 @@ const en: Translations = {
 
   story_eyebrow: 'Our Story', story_h1: 'Master', story_h2: 'of Fire,',
   story_h3: 'Architect', story_h4: 'of Flavor',
-  story_body1: 'ALA Ocakbaşı opened its doors in Şirinyalı, nestled within Antalya\'s breathtaking Mediterranean coast, with a dream of presenting the Mediterranean kitchen in its purest form. Every dish holds a story; every flame, a work of art.',
+  story_body1: 'ÂLÂ Ocakbaşı opened its doors in Şirinyalı, nestled within Antalya\'s breathtaking Mediterranean coast, with a dream of presenting the Mediterranean kitchen in its purest form. Every dish holds a story; every flame, a work of art.',
   story_body2: 'Chef Mehmet Ali Öztürk, whose roots run deep in Adana\'s fiery hearths, began standing by his father\'s grill at age seven. After graduating from Le Cordon Bleu in Paris and working with Michelin-starred restaurants, he arrived in Antalya — and created a legend.',
   story_body3: 'Shaped by Antalya\'s warm Mediterranean soul, the space is a symphony of raw concrete, dark oak and gold accents. Through the open-kitchen concept, guests can follow every dish as it comes to life from the chef\'s hands.',
   story_founded: 'Founded', stat_years: 'Years', stat_dishes: 'Signature Dishes',
@@ -296,7 +296,7 @@ const de: Translations = {
 
   story_eyebrow: 'Unsere Geschichte', story_h1: 'Meister', story_h2: 'des Feuers,',
   story_h3: 'Architekt', story_h4: 'des Geschmacks',
-  story_body1: 'ALA Ocakbaşı öffnete seine Türen in Şirinyalı, eingebettet in Antalyas atemberaubende Mittelmeerküste, mit dem Traum, die mediterrane Küche in ihrer reinsten Form zu präsentieren. In jedem Gericht steckt eine Geschichte; in jeder Flamme ein Kunstwerk.',
+  story_body1: 'ÂLÂ Ocakbaşı öffnete seine Türen in Şirinyalı, eingebettet in Antalyas atemberaubende Mittelmeerküste, mit dem Traum, die mediterrane Küche in ihrer reinsten Form zu präsentieren. In jedem Gericht steckt eine Geschichte; in jeder Flamme ein Kunstwerk.',
   story_body2: 'Küchenchef Mehmet Ali Öztürk, dessen Wurzeln tief in den feurigen Herden Adanas verwurzelt sind, begann im Alter von sieben Jahren neben dem Grill seines Vaters zu stehen. Nach dem Abschluss am Le Cordon Bleu in Paris und der Zusammenarbeit mit Michelin-Sterne-Restaurants kam er nach Antalya — und schuf eine Legende.',
   story_body3: 'Geprägt von Antalyas warmem Mittelmeergeist ist das Restaurant eine Symphonie aus Rohbeton, dunkler Eiche und Goldakzenten. Durch das Open-Kitchen-Konzept können Gäste jedem Gericht bei seiner Entstehung aus der Hand des Küchenchefs folgen.',
   story_founded: 'Gründung', stat_years: 'Jahre', stat_dishes: 'Signature-Gerichte',
@@ -442,7 +442,7 @@ const ru: Translations = {
 
   story_eyebrow: 'Наша история', story_h1: 'Мастер', story_h2: 'огня,',
   story_h3: 'Архитектор', story_h4: 'вкуса',
-  story_body1: 'ALA Ocakbaşı открыл свои двери в Ширинялы, в сердце живописного средиземноморского побережья Антальи, с мечтой представить средиземноморскую кухню в самом чистом виде. В каждом блюде — история, в каждом пламени — искусство.',
+  story_body1: 'ÂLÂ Ocakbaşı открыл свои двери в Ширинялы, в сердце живописного средиземноморского побережья Антальи, с мечтой представить средиземноморскую кухню в самом чистом виде. В каждом блюде — история, в каждом пламени — искусство.',
   story_body2: 'Шеф-повар Мехмет Али Озтурк, чьи корни уходят в огненные очаги Аданы, начал стоять рядом с отцом у гриля в возрасте семи лет. Окончив Le Cordon Bleu в Париже и проработав в ресторанах со звёздами Мишлен, он приехал в Анталью — и создал легенду.',
   story_body3: 'Сформированное тёплым средиземноморским духом Антальи, пространство представляет собой симфонию из необработанного бетона, тёмного дуба и золотых акцентов. Благодаря концепции открытой кухни гости могут наблюдать, как каждое блюдо рождается из рук шеф-повара.',
   story_founded: 'Основание', stat_years: 'Лет', stat_dishes: 'Авторских блюд',
@@ -515,7 +515,7 @@ const fr: Translations = {
 
   story_eyebrow: 'Notre Histoire', story_h1: 'Maître', story_h2: 'du Feu,',
   story_h3: 'Architecte', story_h4: 'des Saveurs',
-  story_body1: 'ALA Ocakbaşı a ouvert ses portes à Şirinyalı, au cœur du magnifique littoral méditerranéen d\'Antalya, avec le rêve de présenter la cuisine méditerranéenne dans sa forme la plus pure. Chaque plat recèle une histoire ; chaque flamme, une œuvre d\'art.',
+  story_body1: 'ÂLÂ Ocakbaşı a ouvert ses portes à Şirinyalı, au cœur du magnifique littoral méditerranéen d\'Antalya, avec le rêve de présenter la cuisine méditerranéenne dans sa forme la plus pure. Chaque plat recèle une histoire ; chaque flamme, une œuvre d\'art.',
   story_body2: 'Le chef Mehmet Ali Öztürk, dont les racines plongent dans les âtres ardents d\'Adana, a commencé à se tenir aux côtés du gril de son père à l\'âge de sept ans. Après l\'obtention de son diplôme du Cordon Bleu à Paris et sa collaboration avec des restaurants étoilés Michelin, il est venu à Antalya — et a créé une légende.',
   story_body3: 'Façonné par l\'âme méditerranéenne chaleureuse d\'Antalya, l\'espace est une symphonie de béton brut, de chêne sombre et d\'accents dorés. Grâce au concept de cuisine ouverte, les convives peuvent suivre chaque plat qui prend vie sous les mains du chef.',
   story_founded: 'Fondation', stat_years: 'Ans', stat_dishes: 'Plats signature',

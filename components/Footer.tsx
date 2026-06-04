@@ -30,7 +30,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <span className="font-instrument italic text-luxury-gold text-3xl tracking-wider">ALA</span>
+              <span className="font-instrument italic text-luxury-gold text-3xl tracking-wider">ÂLÂ</span>
               <span className="w-px h-6 bg-luxury-gold/30" />
               <span className="font-instrument text-luxury-cream/70 text-sm tracking-[0.3em] uppercase">Ocakbaşı</span>
             </div>
@@ -98,7 +98,7 @@ export default function Footer() {
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-luxury-cream/20 text-[10px] tracking-wider uppercase font-inter">
-            © {new Date().getFullYear()} ALA Ocakbaşı · {t.footer_copy}
+            © {new Date().getFullYear()} ÂLÂ Ocakbaşı · {t.footer_copy}
           </p>
           <p className="text-luxury-cream/15 text-[10px] tracking-wider uppercase font-inter">
             {t.footer_finedining}

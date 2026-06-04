@@ -22,7 +22,7 @@ export async function POST(request: Request) {
 
     const html = `
       <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; background: #081A0C; color: #F0ECD8; padding: 40px; border: 1px solid #C9A227;">
-        <h1 style="color: #C9A227; font-size: 28px; margin-bottom: 8px; font-style: italic;">ALA Ocakbaşı</h1>
+        <h1 style="color: #C9A227; font-size: 28px; margin-bottom: 8px; font-style: italic;">ÂLÂ Ocakbaşı</h1>
         <p style="color: #C9A227; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 32px;">Yeni Rezervasyon Talebi</p>
         <hr style="border: none; border-top: 1px solid #C9A22740; margin-bottom: 32px;" />
 
@@ -60,13 +60,13 @@ export async function POST(request: Request) {
 
         <hr style="border: none; border-top: 1px solid #C9A22740; margin-top: 32px;" />
         <p style="color: #C9A22780; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-top: 24px;">
-          ALA Ocakbaşı · Şirinyalı, 1539. Sk. No:4, Muratpaşa/Antalya
+          ÂLÂ Ocakbaşı · Şirinyalı, 1539. Sk. No:4, Muratpaşa/Antalya
         </p>
       </div>
     `;
 
     await transporter.sendMail({
-      from: `"ALA Ocakbaşı" <${process.env.GMAIL_USER}>`,
+      from: `"ÂLÂ Ocakbaşı" <${process.env.GMAIL_USER}>`,
       to: TO_EMAIL,
       replyTo: email,
       subject: `Rezervasyon: ${name} · ${date} ${time} · ${party}`,

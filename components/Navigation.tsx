@@ -52,7 +52,7 @@ export default function Navigation({ locale }: { locale: string }) {
             className="flex items-center gap-3"
           >
             <span className="font-instrument italic text-luxury-gold text-2xl tracking-wider">
-              ALA
+              ÂLÂ
             </span>
             <span className="w-px h-5 bg-luxury-gold/40" />
             <span className="font-instrument text-luxury-cream/90 text-sm tracking-[0.3em] uppercase">

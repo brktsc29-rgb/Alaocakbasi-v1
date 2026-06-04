@@ -10,7 +10,7 @@ export default function GizlilikPage({ params }: { params: { locale: string } })
       <div className="border-b border-luxury-gold/10 py-6 px-6">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <Link href={`/${params.locale}`} className="flex items-center gap-3">
-            <span className="font-instrument italic text-luxury-gold text-2xl">ALA</span>
+            <span className="font-instrument italic text-luxury-gold text-2xl">ÂLÂ</span>
             <span className="w-px h-5 bg-luxury-gold/40" />
             <span className="font-instrument text-luxury-cream/80 text-sm tracking-[0.3em] uppercase">Ocakbaşı</span>
           </Link>

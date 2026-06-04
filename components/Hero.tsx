@@ -125,7 +125,7 @@ export default function Hero() {
         <h1 className="overflow-hidden">
           <span className="hero-title-ala opacity-0 block font-instrument italic text-luxury-cream"
             style={{ fontSize: 'clamp(6rem, 20vw, 22rem)', lineHeight: 0.85, letterSpacing: '-0.02em' }}>
-            ALA
+            ÂLÂ
           </span>
           <span className="hero-title-ocak opacity-0 block font-instrument text-luxury-cream"
             style={{ fontSize: 'clamp(2.5rem, 8.5vw, 9rem)', lineHeight: 1, letterSpacing: '0.15em' }}>
