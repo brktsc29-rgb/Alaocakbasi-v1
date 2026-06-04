@@ -68,8 +68,6 @@ export default function MenuShowcase() {
     <section ref={sectionRef} id="menu"
       className="relative bg-luxury-black py-32 md:py-40 overflow-hidden"
     >
-      <div className="absolute inset-0 pointer-events-none opacity-30"
-        style={{ backgroundImage: `radial-gradient(circle at 1px 1px, rgba(212,175,55,0.06) 1px, transparent 0)`, backgroundSize: '40px 40px' }} />
 
       <div className="max-w-5xl mx-auto px-6">
         <div className="menu-header text-center mb-16 opacity-0">
@@ -119,22 +117,20 @@ export default function MenuShowcase() {
         ) : (
           <AnimatePresence mode="wait">
             <motion.div key={active}
-              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.4, ease: 'easeOut' }}
+              initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }} transition={{ duration: 0.25 }}
               className="space-y-0"
             >
-              {filtered.map((item, i) => (
-                <motion.div key={item.id}
-                  initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.06 }}
-                  className="py-5 border-b border-luxury-cream/5 group hover:bg-luxury-gold/[0.03] transition-colors duration-300 px-2 -mx-2"
+              {filtered.map((item) => (
+                <div key={item.id}
+                  className="py-5 border-b border-luxury-cream/5 group md:hover:bg-luxury-gold/[0.03] md:transition-colors md:duration-300 px-2 -mx-2"
                 >
                   {/* Name + dotted line + price row */}
                   <div className="flex items-baseline justify-between gap-4">
                     <div className="flex items-baseline gap-4 flex-1 min-w-0">
                       <div className="flex items-center gap-2 shrink-0">
                         {item.special && <span className="w-1.5 h-1.5 rounded-full bg-luxury-gold shrink-0" />}
-                        <h4 className="font-instrument text-luxury-cream group-hover:text-luxury-gold transition-colors duration-300 text-xl">
+                        <h4 className="font-instrument text-luxury-cream md:group-hover:text-luxury-gold md:transition-colors md:duration-300 text-xl">
                           {item.name}
                         </h4>
                       </div>
@@ -155,7 +151,7 @@ export default function MenuShowcase() {
                       {item.descriptions?.[locale] ?? item.description}
                     </p>
                   )}
-                </motion.div>
+                </div>
               ))}
             </motion.div>
           </AnimatePresence>
