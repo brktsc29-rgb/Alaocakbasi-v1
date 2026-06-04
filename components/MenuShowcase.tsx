@@ -123,25 +123,34 @@ export default function MenuShowcase() {
                 <motion.div key={item.id}
                   initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.06 }}
-                  className="flex items-baseline justify-between gap-4 py-5 border-b border-luxury-cream/5 group hover:bg-luxury-gold/[0.03] transition-colors duration-300 px-2 -mx-2"
+                  className="py-5 border-b border-luxury-cream/5 group hover:bg-luxury-gold/[0.03] transition-colors duration-300 px-2 -mx-2"
                 >
-                  <div className="flex items-baseline gap-4 flex-1 min-w-0">
-                    <div className="flex items-center gap-2 shrink-0">
-                      {item.special && <span className="w-1.5 h-1.5 rounded-full bg-luxury-gold shrink-0" />}
-                      <h4 className="font-instrument text-luxury-cream group-hover:text-luxury-gold transition-colors duration-300 text-xl">
-                        {item.name}
-                      </h4>
+                  {/* Name + dotted line + price row */}
+                  <div className="flex items-baseline justify-between gap-4">
+                    <div className="flex items-baseline gap-4 flex-1 min-w-0">
+                      <div className="flex items-center gap-2 shrink-0">
+                        {item.special && <span className="w-1.5 h-1.5 rounded-full bg-luxury-gold shrink-0" />}
+                        <h4 className="font-instrument text-luxury-cream group-hover:text-luxury-gold transition-colors duration-300 text-xl">
+                          {item.name}
+                        </h4>
+                      </div>
+                      <div className="flex-1 border-b border-dotted border-luxury-cream/10 mb-1" />
                     </div>
-                    <div className="flex-1 border-b border-dotted border-luxury-cream/10 mb-1" />
+                    <div className="flex items-baseline gap-6 shrink-0">
+                      {item.description && (
+                        <p className="text-luxury-cream/30 text-xs font-inter hidden md:block max-w-[260px] text-right">
+                          {item.description}
+                        </p>
+                      )}
+                      <span className="font-instrument text-luxury-gold text-lg whitespace-nowrap">{item.price}</span>
+                    </div>
                   </div>
-                  <div className="flex items-baseline gap-6 shrink-0">
-                    {item.description && (
-                      <p className="text-luxury-cream/30 text-xs font-inter hidden md:block max-w-[260px] text-right">
-                        {item.description}
-                      </p>
-                    )}
-                    <span className="font-instrument text-luxury-gold text-lg whitespace-nowrap">{item.price}</span>
-                  </div>
+                  {/* Description below name — mobile only */}
+                  {item.description && (
+                    <p className="md:hidden text-luxury-cream/30 text-xs font-inter mt-1.5 pl-4 leading-relaxed">
+                      {item.description}
+                    </p>
+                  )}
                 </motion.div>
               ))}
             </motion.div>
