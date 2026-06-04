@@ -69,7 +69,7 @@ export default function Footer() {
             <div className="flex gap-3 mt-6">
               {[
                 { Icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/alaocakbasi' },
-                { Icon: Facebook,  label: 'Facebook',  href: '#' },
+                { Icon: Facebook,  label: 'Facebook',  href: 'https://www.facebook.com/share/18iChwtzMT/?mibextid=wwXIfr' },
                 { Icon: Twitter,   label: 'Twitter',   href: '#' },
               ].map(({ Icon, label, href }) => (
                 <a key={label} href={href} aria-label={label}

@@ -69,7 +69,7 @@ export default function Location() {
               >
                 <Instagram size={16} />
               </a>
-              <a href="#" aria-label="Facebook"
+              <a href="https://www.facebook.com/share/18iChwtzMT/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook"
                 className="w-10 h-10 border border-luxury-cream/10 flex items-center justify-center text-luxury-cream/40 hover:border-luxury-gold/40 hover:text-luxury-gold transition-all duration-300"
               >
                 <Facebook size={16} />
