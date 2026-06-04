@@ -510,8 +510,12 @@ export default function AdminPage() {
                     <input
                       type="text"
                       value={form.price}
-                      onChange={(e) => setForm({ ...form, price: e.target.value })}
-                      placeholder="Örn: ₺480"
+                      onChange={(e) => {
+                        let val = e.target.value;
+                        if (val && !val.startsWith('₺')) val = '₺' + val;
+                        setForm({ ...form, price: val });
+                      }}
+                      placeholder="₺0"
                       className="luxury-input text-sm"
                     />
                   </div>
@@ -586,9 +590,9 @@ export default function AdminPage() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.2 }}
-              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-sm"
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none"
             >
-              <div className="glass m-4 p-8 text-center border border-red-400/20">
+              <div className="glass w-full max-w-sm p-8 text-center border border-red-400/20 pointer-events-auto">
                 <div className="w-12 h-12 border border-red-400/30 flex items-center justify-center mx-auto mb-5">
                   <Trash2 size={20} className="text-red-400" />
                 </div>
