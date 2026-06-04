@@ -288,12 +288,12 @@ export default function AdminPage() {
         </div>
 
         {/* Category tabs */}
-        <div className="flex border-b border-luxury-cream/5 mb-6">
+        <div className="flex overflow-x-auto border-b border-luxury-cream/5 mb-6">
           {CATEGORIES.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveTab(cat.id)}
-              className={`px-5 py-3 text-xs tracking-[0.2em] uppercase font-inter transition-all duration-200 border-b-2 -mb-px ${
+              className={`px-5 py-3 text-xs tracking-[0.2em] uppercase font-inter transition-all duration-200 border-b-2 -mb-px whitespace-nowrap shrink-0 ${
                 activeTab === cat.id
                   ? 'border-luxury-gold text-luxury-gold'
                   : 'border-transparent text-luxury-cream/30 hover:text-luxury-cream/60'
