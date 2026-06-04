@@ -30,7 +30,7 @@ function SelectionCard({ name, region, note, year, price, featured, extra, delay
     <motion.div
       initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay, ease: 'easeOut' }} viewport={{ once: true }}
-      className={`card-shine relative p-6 border transition-all duration-500 hover:border-luxury-gold/40 group ${
+      className={`relative p-6 border md:transition-all md:duration-500 md:hover:border-luxury-gold/40 group ${
         featured ? 'border-luxury-gold/30 bg-luxury-gold/[0.04]' : 'border-luxury-cream/5 bg-luxury-surface/40'
       }`}
     >
@@ -41,7 +41,7 @@ function SelectionCard({ name, region, note, year, price, featured, extra, delay
       )}
       <div className="flex justify-between items-start gap-4">
         <div className="flex-1">
-          <h4 className="font-instrument text-luxury-cream text-xl group-hover:text-luxury-gold transition-colors duration-300 mb-1">
+          <h4 className="font-instrument text-luxury-cream text-xl md:group-hover:text-luxury-gold md:transition-colors md:duration-300 mb-1">
             {name}
           </h4>
           <p className="text-luxury-cream/30 text-[10px] tracking-[0.2em] uppercase font-inter">{region}</p>
@@ -81,8 +81,8 @@ export default function WineRaki() {
           alt="" fill className="object-cover" aria-hidden="true" />
         <div className="absolute inset-0 bg-luxury-surface/90" />
       </div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(212,175,55,0.04) 0%, transparent 70%)', filter: 'blur(100px)' }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none opacity-30"
+        style={{ background: 'radial-gradient(circle, rgba(212,175,55,0.06) 0%, transparent 70%)' }} />
 
       <div className="relative max-w-7xl mx-auto px-6">
         <div className="wine-header text-center mb-20 opacity-0">
