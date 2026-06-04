@@ -348,14 +348,16 @@ export default function AdminPage() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-lg"
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none"
             >
-              <div className="glass m-4 p-8 relative">
+              <div className="glass w-full max-w-lg max-h-[90dvh] overflow-y-auto relative pointer-events-auto">
                 {/* Corner decorations */}
                 <div className="absolute top-0 left-0 w-6 h-6 border-t border-l border-luxury-gold/40" />
                 <div className="absolute top-0 right-0 w-6 h-6 border-t border-r border-luxury-gold/40" />
                 <div className="absolute bottom-0 left-0 w-6 h-6 border-b border-l border-luxury-gold/40" />
                 <div className="absolute bottom-0 right-0 w-6 h-6 border-b border-r border-luxury-gold/40" />
+
+                <div className="p-6 sm:p-8">
 
                 {/* Close */}
                 <button
@@ -481,7 +483,8 @@ export default function AdminPage() {
                     </button>
                   </div>
                 </form>
-              </div>
+                </div>{/* /p-6 sm:p-8 */}
+              </div>{/* /glass */}
             </motion.div>
           </>
         )}
