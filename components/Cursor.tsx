@@ -9,9 +9,15 @@ export default function Cursor() {
   const followerPos = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
+    // Touch / mobile devices don't need a custom cursor
+    if (window.matchMedia('(hover: none)').matches) return;
+
     const cursor = cursorRef.current;
     const follower = followerRef.current;
     if (!cursor || !follower) return;
+
+    cursor.style.display = 'block';
+    follower.style.display = 'block';
 
     const onMouseMove = (e: MouseEvent) => {
       pos.current = { x: e.clientX, y: e.clientY };
@@ -76,16 +82,8 @@ export default function Cursor() {
 
   return (
     <>
-      <div
-        ref={cursorRef}
-        id="custom-cursor"
-        aria-hidden="true"
-      />
-      <div
-        ref={followerRef}
-        id="custom-cursor-follower"
-        aria-hidden="true"
-      />
+      <div ref={cursorRef}  id="custom-cursor"          aria-hidden="true" style={{ display: 'none' }} />
+      <div ref={followerRef} id="custom-cursor-follower" aria-hidden="true" style={{ display: 'none' }} />
     </>
   );
 }

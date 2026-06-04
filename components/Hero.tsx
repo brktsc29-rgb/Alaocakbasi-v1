@@ -23,6 +23,9 @@ export default function Hero() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    const isMobile = window.innerWidth < 768;
+    const PARTICLE_COUNT = isMobile ? 28 : 60;
+
     const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
     resize();
     window.addEventListener('resize', resize);
@@ -38,7 +41,7 @@ export default function Hero() {
       color: colors[Math.floor(Math.random() * colors.length)], opacity: 0,
     });
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
       const p = createParticle();
       p.life = Math.random() * p.maxLife;
       p.y = canvas.height - Math.random() * canvas.height;
@@ -55,18 +58,32 @@ export default function Hero() {
         p.opacity = Math.sin((p.life / p.maxLife) * Math.PI) * 0.8;
         const size = p.size * (1 - (p.life / p.maxLife) * 0.7);
         if (p.life >= p.maxLife) { Object.assign(p, createParticle()); continue; }
-        ctx.save();
         ctx.globalAlpha = p.opacity;
-        ctx.shadowBlur = 12; ctx.shadowColor = p.color;
+        if (!isMobile) {
+          ctx.shadowBlur = 6;
+          ctx.shadowColor = p.color;
+        }
         ctx.beginPath(); ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
         ctx.fillStyle = p.color; ctx.fill();
-        ctx.restore();
       }
+      ctx.globalAlpha = 1;
+      ctx.shadowBlur = 0;
       rafId = requestAnimationFrame(animate);
     };
+
+    const onVisibilityChange = () => {
+      if (document.hidden) cancelAnimationFrame(rafId);
+      else animate();
+    };
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
     animate();
 
-    return () => { cancelAnimationFrame(rafId); window.removeEventListener('resize', resize); };
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener('resize', resize);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+    };
   }, []);
 
   useEffect(() => {
