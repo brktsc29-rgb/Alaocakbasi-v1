@@ -1,7 +1,9 @@
 'use client';
 
 import { Instagram, Facebook, Twitter } from 'lucide-react';
+import Link from 'next/link';
 import { useT } from '@/contexts/I18nContext';
+import { useParams } from 'next/navigation';
 
 const handleScroll = (href: string) => {
   document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
@@ -9,6 +11,8 @@ const handleScroll = (href: string) => {
 
 export default function Footer() {
   const t = useT();
+  const params = useParams();
+  const locale = (params?.locale as string) ?? 'tr';
 
   const footerLinks = [
     { label: t.nav_story,       href: '#story' },
@@ -100,12 +104,18 @@ export default function Footer() {
             {t.footer_finedining}
           </p>
           <div className="flex gap-6">
-            <a href="#" className="text-luxury-cream/20 text-[10px] tracking-wider uppercase font-inter hover:text-luxury-cream/50 transition-colors duration-300">
+            <Link href={`/${locale}/gizlilik`}
+              className="text-luxury-cream/20 text-[10px] tracking-wider uppercase font-inter hover:text-luxury-cream/50 transition-colors duration-300">
               {t.footer_privacy}
-            </a>
-            <a href="#" className="text-luxury-cream/20 text-[10px] tracking-wider uppercase font-inter hover:text-luxury-cream/50 transition-colors duration-300">
+            </Link>
+            <Link href={`/${locale}/kullanim-kosullari`}
+              className="text-luxury-cream/20 text-[10px] tracking-wider uppercase font-inter hover:text-luxury-cream/50 transition-colors duration-300">
               {t.footer_terms}
-            </a>
+            </Link>
+            <Link href={`/${locale}/cerez-politikasi`}
+              className="text-luxury-cream/20 text-[10px] tracking-wider uppercase font-inter hover:text-luxury-cream/50 transition-colors duration-300">
+              Çerez Politikası
+            </Link>
           </div>
         </div>
       </div>

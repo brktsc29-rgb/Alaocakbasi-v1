@@ -15,6 +15,7 @@ const Reservation = dynamic(() => import('@/components/Reservation'));
 const Location = dynamic(() => import('@/components/Location'));
 const Footer = dynamic(() => import('@/components/Footer'));
 const WhatsAppButton = dynamic(() => import('@/components/WhatsAppButton'), { ssr: false });
+const CookieConsent = dynamic(() => import('@/components/CookieConsent'), { ssr: false });
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
@@ -39,6 +40,7 @@ export default function LocalePage({ params }: { params: { locale: string } }) {
       </main>
       <Footer />
       <WhatsAppButton />
+      <CookieConsent />
     </>
   );
 }
