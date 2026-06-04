@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence, Reorder } from 'framer-motion';
-import { Plus, Pencil, Trash2, LogOut, Star, X, Check, AlertTriangle, GripVertical, Wine, UtensilsCrossed, ImageIcon } from 'lucide-react';
+import { Plus, Pencil, Trash2, LogOut, Star, X, Check, AlertTriangle, GripVertical, Wine, UtensilsCrossed, ImageIcon, Upload } from 'lucide-react';
 
 interface MenuItem {
   id: string;
@@ -121,6 +121,8 @@ export default function AdminPage() {
   const [sigFormError, setSigFormError] = useState('');
   const [sigDeleteTarget, setSigDeleteTarget] = useState<SignatureDish | null>(null);
   const [sigDeleting, setSigDeleting] = useState(false);
+  const [sigUploading, setSigUploading] = useState(false);
+  const sigFileRef = useRef<HTMLInputElement>(null);
 
   // ── Toast ─────────────────────────────────────────────────────────────────────
   const [toast, setToast] = useState<{ msg: string; ok: boolean } | null>(null);
@@ -380,6 +382,23 @@ export default function AdminPage() {
   };
 
   // ── Signature CRUD ────────────────────────────────────────────────────────────
+  const handleSigImageUpload = async (file: File) => {
+    setSigUploading(true);
+    setSigFormError('');
+    try {
+      const fd = new FormData();
+      fd.append('file', file);
+      const r = await fetch('/api/upload', { method: 'POST', body: fd });
+      const data = await r.json() as { url?: string; error?: string };
+      if (!r.ok) throw new Error(data.error ?? 'Yükleme başarısız.');
+      setSigForm((prev) => ({ ...prev, image: data.url! }));
+    } catch (err) {
+      setSigFormError(err instanceof Error ? err.message : 'Yükleme başarısız.');
+    } finally {
+      setSigUploading(false);
+    }
+  };
+
   const openSigAdd = () => { setEditSig(null); setSigForm(EMPTY_SIGNATURE_FORM); setSigFormError(''); setSigModalOpen(true); };
   const openSigEdit = (d: SignatureDish) => { setEditSig(d); setSigForm({ name: d.name, price: d.price, subtitle: d.subtitle, description: d.description, tag: d.tag, image: d.image }); setSigFormError(''); setSigModalOpen(true); };
   const closeSigModal = () => { setSigModalOpen(false); setEditSig(null); setSigFormError(''); };
@@ -1003,13 +1022,47 @@ export default function AdminPage() {
                         placeholder="₺0" className="luxury-input text-sm" />
                     </div>
                     <div>
-                      <label className="text-luxury-gold/50 text-[9px] tracking-[0.3em] uppercase font-inter block mb-2">Görsel URL</label>
-                      <input type="text" value={sigForm.image} onChange={(e) => setSigForm({ ...sigForm, image: e.target.value })}
-                        placeholder="https://…" className="luxury-input text-sm" />
-                      {sigForm.image && (
-                        <div className="mt-3 relative w-full h-32 overflow-hidden border border-luxury-cream/10">
+                      <label className="text-luxury-gold/50 text-[9px] tracking-[0.3em] uppercase font-inter block mb-2">Görsel</label>
+                      <input
+                        ref={sigFileRef}
+                        type="file"
+                        accept="image/jpeg,image/png,image/webp,image/gif"
+                        className="hidden"
+                        onChange={(e) => { const f = e.target.files?.[0]; if (f) handleSigImageUpload(f); }}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => sigFileRef.current?.click()}
+                        disabled={sigUploading}
+                        className="w-full border border-dashed border-luxury-cream/20 hover:border-luxury-gold/40 transition-colors duration-200 py-4 flex flex-col items-center gap-2 text-luxury-cream/30 hover:text-luxury-gold disabled:opacity-50"
+                      >
+                        {sigUploading ? (
+                          <>
+                            <div className="w-5 h-5 border-2 border-luxury-gold/40 border-t-luxury-gold rounded-full animate-spin" />
+                            <span className="text-[10px] tracking-wider uppercase font-inter">Yükleniyor…</span>
+                          </>
+                        ) : (
+                          <>
+                            <Upload size={18} />
+                            <span className="text-[10px] tracking-wider uppercase font-inter">
+                              {sigForm.image ? 'Görseli Değiştir' : 'Görsel Yükle'}
+                            </span>
+                            <span className="text-[9px] font-inter opacity-60">JPG, PNG, WebP · Maks. 8 MB</span>
+                          </>
+                        )}
+                      </button>
+                      {sigForm.image && !sigUploading && (
+                        <div className="mt-3 relative w-full h-36 overflow-hidden border border-luxury-cream/10">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={sigForm.image} alt="Önizleme" className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                          <img src={sigForm.image} alt="Önizleme" className="w-full h-full object-cover" />
+                          <button
+                            type="button"
+                            onClick={() => setSigForm({ ...sigForm, image: '' })}
+                            className="absolute top-2 right-2 w-6 h-6 bg-luxury-black/70 flex items-center justify-center text-luxury-cream/60 hover:text-red-400 transition-colors"
+                            aria-label="Görseli kaldır"
+                          >
+                            <X size={12} />
+                          </button>
                         </div>
                       )}
                     </div>
