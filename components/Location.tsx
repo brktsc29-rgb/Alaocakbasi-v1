@@ -89,10 +89,12 @@ export default function Location() {
             <div className="relative w-full h-full min-h-[400px] overflow-hidden border border-luxury-gold/20">
               <iframe
                 title="ALA Ocakbaşı Konum"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=30.742,36.868,30.758,36.878&layer=mapnik&marker=36.8730,30.7500"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3192.375795612985!2d30.734382287468808!3d36.8574228006303!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c39bb91b3d4429%3A0x113a54451d3ad913!2zw4JMw4IgT2Nha2JhxZ_EsQ!5e0!3m2!1str!2str!4v1780605190016!5m2!1str!2str"
                 width="100%" height="100%"
-                style={{ filter: 'grayscale(100%) invert(90%) sepia(20%) saturate(50%)', minHeight: '400px', border: 'none' }}
+                style={{ minHeight: '400px', border: 'none' }}
                 loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
               />
               <div className="absolute inset-0 pointer-events-none"
                 style={{ background: 'linear-gradient(135deg, rgba(10,10,10,0.3) 0%, rgba(212,175,55,0.05) 100%)', mixBlendMode: 'multiply' }} />
