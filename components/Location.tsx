@@ -13,10 +13,10 @@ export default function Location() {
   const sectionRef = useRef<HTMLElement>(null);
 
   const info = [
-    { icon: MapPin, label: t.loc_label_address, value: 'Şirinyalı Mah. 1539. Sk. No:4\nMuratpaşa, Antalya 07160' },
-    { icon: Phone, label: t.loc_label_phone,   value: '+90 (242) 555 00 00' },
-    { icon: Mail,  label: t.loc_label_email,   value: 'info@alaocakbasi.com' },
-    { icon: Clock, label: t.loc_label_hours,   value: t.loc_hours_value },
+    { icon: MapPin, label: t.loc_label_address, value: 'Şirinyalı Mah. 1539. Sk. No:4\nMuratpaşa, Antalya 07160', href: null },
+    { icon: Phone,  label: t.loc_label_phone,   value: '+90 532 175 67 07', href: 'https://wa.me/905321756707' },
+    { icon: Mail,   label: t.loc_label_email,   value: 'info@alaocakbasi.com', href: 'mailto:info@alaocakbasi.com' },
+    { icon: Clock,  label: t.loc_label_hours,   value: t.loc_hours_value, href: null },
   ];
 
   useEffect(() => {
@@ -49,14 +49,21 @@ export default function Location() {
             </h2>
 
             <div className="space-y-8 mb-12">
-              {info.map(({ icon: Icon, label, value }) => (
+              {info.map(({ icon: Icon, label, value, href }) => (
                 <div key={label} className="flex items-start gap-5">
                   <div className="w-10 h-10 border border-luxury-gold/25 flex items-center justify-center shrink-0">
                     <Icon size={16} className="text-luxury-gold/70" />
                   </div>
                   <div>
                     <p className="text-luxury-gold/50 text-[9px] tracking-[0.3em] uppercase font-inter mb-1">{label}</p>
-                    <p className="text-luxury-cream/70 text-sm font-inter font-light leading-relaxed whitespace-pre-line">{value}</p>
+                    {href ? (
+                      <a href={href} target="_blank" rel="noopener noreferrer"
+                        className="text-luxury-cream/70 text-sm font-inter font-light leading-relaxed whitespace-pre-line hover:text-luxury-gold transition-colors duration-300">
+                        {value}
+                      </a>
+                    ) : (
+                      <p className="text-luxury-cream/70 text-sm font-inter font-light leading-relaxed whitespace-pre-line">{value}</p>
+                    )}
                   </div>
                 </div>
               ))}

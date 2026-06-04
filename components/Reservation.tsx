@@ -36,9 +36,9 @@ export default function Reservation() {
   const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); setSubmitted(true); };
 
   const contactInfo = [
-    { label: t.res_label_phone, value: '+90 (242) 555 00 00' },
-    { label: t.res_label_email, value: 'rezervasyon@alaocakbasi.com' },
-    { label: t.res_label_hours, value: t.res_hours_value },
+    { label: t.res_label_phone, value: '+90 532 175 67 07', href: 'https://wa.me/905321756707' },
+    { label: t.res_label_email, value: 'rezervasyon@alaocakbasi.com', href: 'mailto:rezervasyon@alaocakbasi.com' },
+    { label: t.res_label_hours, value: t.res_hours_value, href: null },
   ];
 
   return (
@@ -137,7 +137,14 @@ export default function Reservation() {
           {contactInfo.map((item) => (
             <div key={item.label} className="p-6 border border-luxury-cream/5">
               <p className="text-luxury-gold/60 text-[9px] tracking-[0.4em] uppercase font-inter mb-3">{item.label}</p>
-              <p className="text-luxury-cream/60 text-sm font-inter font-light">{item.value}</p>
+              {item.href ? (
+                <a href={item.href} target="_blank" rel="noopener noreferrer"
+                  className="text-luxury-cream/60 text-sm font-inter font-light hover:text-luxury-gold transition-colors duration-300">
+                  {item.value}
+                </a>
+              ) : (
+                <p className="text-luxury-cream/60 text-sm font-inter font-light">{item.value}</p>
+              )}
             </div>
           ))}
         </div>

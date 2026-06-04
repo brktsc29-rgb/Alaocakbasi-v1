@@ -14,6 +14,7 @@ const WineRaki = dynamic(() => import('@/components/WineRaki'));
 const Reservation = dynamic(() => import('@/components/Reservation'));
 const Location = dynamic(() => import('@/components/Location'));
 const Footer = dynamic(() => import('@/components/Footer'));
+const WhatsAppButton = dynamic(() => import('@/components/WhatsAppButton'), { ssr: false });
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
@@ -37,6 +38,7 @@ export default function LocalePage({ params }: { params: { locale: string } }) {
         <Location />
       </main>
       <Footer />
+      <WhatsAppButton />
     </>
   );
 }
