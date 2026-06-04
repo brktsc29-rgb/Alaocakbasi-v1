@@ -59,8 +59,14 @@ export default function Footer() {
               {t.footer_contact}
             </p>
             <div className="space-y-3">
-              <p className="text-luxury-cream/40 text-xs font-inter font-light">+90 (242) 555 00 00</p>
-              <p className="text-luxury-cream/40 text-xs font-inter font-light">info@alaocakbasi.com</p>
+              <a href="https://wa.me/905321756707" target="_blank" rel="noopener noreferrer"
+                className="text-luxury-cream/40 text-xs font-inter font-light hover:text-luxury-gold transition-colors duration-300 block">
+                +90 532 175 67 07
+              </a>
+              <a href="mailto:alaocakbasiantalya@gmail.com"
+                className="text-luxury-cream/40 text-xs font-inter font-light hover:text-luxury-gold transition-colors duration-300 block">
+                alaocakbasiantalya@gmail.com
+              </a>
               <p className="text-luxury-cream/40 text-xs font-inter font-light leading-relaxed">
                 1539. Sk. No:4, Şirinyalı<br />
                 Muratpaşa, Antalya 07160

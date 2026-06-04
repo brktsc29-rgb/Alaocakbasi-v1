@@ -15,7 +15,7 @@ export default function Location() {
   const info = [
     { icon: MapPin, label: t.loc_label_address, value: 'Şirinyalı Mah. 1539. Sk. No:4\nMuratpaşa, Antalya 07160', href: null },
     { icon: Phone,  label: t.loc_label_phone,   value: '+90 532 175 67 07', href: 'https://wa.me/905321756707' },
-    { icon: Mail,   label: t.loc_label_email,   value: 'info@alaocakbasi.com', href: 'mailto:info@alaocakbasi.com' },
+    { icon: Mail,   label: t.loc_label_email,   value: 'alaocakbasiantalya@gmail.com', href: 'mailto:alaocakbasiantalya@gmail.com' },
     { icon: Clock,  label: t.loc_label_hours,   value: t.loc_hours_value, href: null },
   ];
 

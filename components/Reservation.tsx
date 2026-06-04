@@ -16,6 +16,8 @@ export default function Reservation() {
   const sectionRef = useRef<HTMLElement>(null);
   const [form, setForm] = useState({ name: '', email: '', phone: '', date: '', time: '', party: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -33,12 +35,32 @@ export default function Reservation() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); setSubmitted(true); };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    try {
+      const res = await fetch('/api/reservation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        setError('Bir hata oluştu. Lütfen WhatsApp veya telefon ile iletişime geçin.');
+      }
+    } catch {
+      setError('Bağlantı hatası. Lütfen WhatsApp veya telefon ile iletişime geçin.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const contactInfo = [
-    { label: t.res_label_phone, value: '+90 532 175 67 07', href: 'https://wa.me/905321756707' },
-    { label: t.res_label_email, value: 'rezervasyon@alaocakbasi.com', href: 'mailto:rezervasyon@alaocakbasi.com' },
-    { label: t.res_label_hours, value: t.res_hours_value, href: null },
+    { label: t.res_label_phone, value: '+90 532 175 67 07',              href: 'https://wa.me/905321756707' },
+    { label: t.res_label_email, value: 'alaocakbasiantalya@gmail.com',   href: 'mailto:alaocakbasiantalya@gmail.com' },
+    { label: t.res_label_hours, value: t.res_hours_value,                href: null },
   ];
 
   return (
@@ -121,9 +143,13 @@ export default function Reservation() {
               <textarea name="message" value={form.message} onChange={handleChange}
                 placeholder={t.res_notes} rows={3} className="luxury-input resize-none" />
 
+              {error && (
+                <p className="text-center text-red-400/80 text-xs font-inter">{error}</p>
+              )}
+
               <div className="text-center pt-4">
-                <MagneticButton variant="gold" className="min-w-[240px] py-5">
-                  {t.res_submit}
+                <MagneticButton variant="gold" className="min-w-[240px] py-5" disabled={loading}>
+                  {loading ? t.res_submitting : t.res_submit}
                 </MagneticButton>
                 <p className="text-luxury-cream/20 text-[10px] tracking-widest uppercase font-inter mt-6">
                   {t.res_privacy}

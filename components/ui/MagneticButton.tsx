@@ -9,6 +9,7 @@ interface MagneticButtonProps {
   onClick?: () => void;
   variant?: 'gold' | 'outline' | 'ghost';
   href?: string;
+  disabled?: boolean;
 }
 
 export default function MagneticButton({
@@ -17,6 +18,7 @@ export default function MagneticButton({
   onClick,
   variant = 'gold',
   href,
+  disabled,
 }: MagneticButtonProps) {
   const btnRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
 
@@ -78,7 +80,8 @@ export default function MagneticButton({
     <button
       ref={btnRef as React.RefObject<HTMLButtonElement>}
       onClick={onClick}
-      className={baseClasses}
+      disabled={disabled}
+      className={clsx(baseClasses, disabled && 'opacity-60 cursor-not-allowed')}
       {...sharedProps}
     >
       <span className="relative z-10">{children}</span>
