@@ -407,7 +407,6 @@ export default function AdminPage() {
                       value={form.name}
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
                       placeholder="Örn: Adana Ustabaşı"
-                      required
                       className="luxury-input text-sm"
                     />
                   </div>
@@ -436,7 +435,6 @@ export default function AdminPage() {
                       value={form.price}
                       onChange={(e) => setForm({ ...form, price: e.target.value })}
                       placeholder="Örn: ₺480"
-                      required
                       className="luxury-input text-sm"
                     />
                   </div>

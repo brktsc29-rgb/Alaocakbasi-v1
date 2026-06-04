@@ -106,7 +106,7 @@ export default function Reservation() {
               </p>
             </motion.div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-10">
+            <form onSubmit={handleSubmit} noValidate className="space-y-10">
               <div className="grid md:grid-cols-2 gap-8">
                 <input type="text" name="name" value={form.name} onChange={handleChange}
                   placeholder={t.res_name} required className="luxury-input" />
@@ -128,8 +128,8 @@ export default function Reservation() {
               </div>
 
               <div className="grid md:grid-cols-2 gap-8">
-                <input type="date" name="date" value={form.date} onChange={handleChange}
-                  required className="luxury-input" style={{ colorScheme: 'dark' }} />
+                <input type="text" name="date" value={form.date} onChange={handleChange}
+                  placeholder="GG.AA.YYYY" required className="luxury-input" />
                 <select name="time" value={form.time} onChange={handleChange} required
                   className="luxury-input" style={{ cursor: 'none' }}
                 >
