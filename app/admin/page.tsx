@@ -361,6 +361,7 @@ export default function AdminPage() {
 
                 {/* Close */}
                 <button
+                  type="button"
                   onClick={closeModal}
                   className="absolute top-4 right-4 text-luxury-cream/30 hover:text-luxury-cream/70 transition-colors"
                   aria-label="Kapat"
@@ -372,7 +373,7 @@ export default function AdminPage() {
                   {editItem ? 'Ürünü Düzenle' : 'Yeni Ürün Ekle'}
                 </h2>
 
-                <form onSubmit={handleSave} className="space-y-5">
+                <form onSubmit={handleSave} noValidate className="space-y-5">
                   {/* Category */}
                   <div>
                     <label className="text-luxury-gold/50 text-[9px] tracking-[0.3em] uppercase font-inter block mb-2">
