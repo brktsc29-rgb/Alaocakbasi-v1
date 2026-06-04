@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Pencil, Trash2, LogOut, Star, X, Check, AlertTriangle } from 'lucide-react';
+import { motion, AnimatePresence, Reorder } from 'framer-motion';
+import { Plus, Pencil, Trash2, LogOut, Star, X, Check, AlertTriangle, GripVertical } from 'lucide-react';
 
 interface MenuItem {
   id: string;
@@ -31,6 +31,9 @@ const EMPTY_FORM: Omit<MenuItem, 'id'> = {
   special: false,
 };
 
+const IDLE_WARNING_MS = 28 * 60 * 1000;
+const IDLE_LOGOUT_MS  = 30 * 60 * 1000;
+
 export default function AdminPage() {
   const router = useRouter();
   const [items, setItems] = useState<MenuItem[]>([]);
@@ -50,6 +53,12 @@ export default function AdminPage() {
 
   // Toast
   const [toast, setToast] = useState<{ msg: string; ok: boolean } | null>(null);
+
+  // Idle timeout
+  const idleWarnTimer   = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const idleLogoutTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const reorderTimer    = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [idleWarning, setIdleWarning] = useState(false);
 
   const showToast = (msg: string, ok = true) => {
     setToast({ msg, ok });
@@ -73,6 +82,44 @@ export default function AdminPage() {
       else fetchItems();
     });
   }, [router, fetchItems]);
+
+  const resetIdleTimer = useCallback(() => {
+    if (idleWarnTimer.current)   clearTimeout(idleWarnTimer.current);
+    if (idleLogoutTimer.current) clearTimeout(idleLogoutTimer.current);
+    setIdleWarning(false);
+    idleWarnTimer.current   = setTimeout(() => setIdleWarning(true), IDLE_WARNING_MS);
+    idleLogoutTimer.current = setTimeout(async () => {
+      await fetch('/api/auth/logout', { method: 'POST' });
+      router.replace('/admin/login');
+    }, IDLE_LOGOUT_MS);
+  }, [router]);
+
+  useEffect(() => {
+    const events = ['mousemove', 'mousedown', 'keydown', 'touchstart'];
+    events.forEach((e) => window.addEventListener(e, resetIdleTimer, { passive: true }));
+    resetIdleTimer();
+    return () => {
+      events.forEach((e) => window.removeEventListener(e, resetIdleTimer));
+      if (idleWarnTimer.current)   clearTimeout(idleWarnTimer.current);
+      if (idleLogoutTimer.current) clearTimeout(idleLogoutTimer.current);
+    };
+  }, [resetIdleTimer]);
+
+  const handleReorder = useCallback((newCatOrder: MenuItem[]) => {
+    setItems((prev) => {
+      const others = prev.filter((i) => i.category !== activeTab);
+      const merged = [...others, ...newCatOrder];
+      if (reorderTimer.current) clearTimeout(reorderTimer.current);
+      reorderTimer.current = setTimeout(() => {
+        fetch('/api/menu/order', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ids: merged.map((i) => i.id) }),
+        }).catch(() => {});
+      }, 800);
+      return merged;
+    });
+  }, [activeTab]);
 
   const handleLogout = async () => {
     await fetch('/api/auth/logout', { method: 'POST' });
@@ -276,63 +323,65 @@ export default function AdminPage() {
             </button>
           </div>
         ) : (
-          <div className="space-y-2">
-            <AnimatePresence>
-              {filtered.map((item) => (
-                <motion.div
-                  key={item.id}
-                  layout
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.25 }}
-                  className="flex items-center gap-4 bg-luxury-surface/40 border border-luxury-cream/5 hover:border-luxury-gold/20 px-5 py-4 group transition-colors duration-200"
-                >
-                  {/* Special indicator */}
-                  <Star
-                    size={13}
-                    className={item.special ? 'text-luxury-gold' : 'text-luxury-cream/10'}
-                    fill={item.special ? '#D4AF37' : 'none'}
-                  />
+          <Reorder.Group
+            as="div"
+            axis="y"
+            values={filtered}
+            onReorder={handleReorder}
+            className="space-y-2"
+          >
+            {filtered.map((item) => (
+              <Reorder.Item
+                as="div"
+                key={item.id}
+                value={item}
+                className="flex items-center gap-4 bg-luxury-surface/40 border border-luxury-cream/5 hover:border-luxury-gold/20 px-5 py-4 group transition-colors duration-200 cursor-default select-none"
+              >
+                <GripVertical
+                  size={14}
+                  className="text-luxury-cream/15 hover:text-luxury-cream/40 transition-colors cursor-grab active:cursor-grabbing shrink-0"
+                />
 
-                  {/* Name & Description */}
-                  <div className="flex-1 min-w-0">
-                    <p className="font-instrument text-luxury-cream text-lg leading-tight truncate">
-                      {item.name}
+                <Star
+                  size={13}
+                  className={item.special ? 'text-luxury-gold' : 'text-luxury-cream/10'}
+                  fill={item.special ? '#D4AF37' : 'none'}
+                />
+
+                <div className="flex-1 min-w-0">
+                  <p className="font-instrument text-luxury-cream text-lg leading-tight truncate">
+                    {item.name}
+                  </p>
+                  {item.description && (
+                    <p className="text-luxury-cream/30 text-xs font-inter font-light truncate mt-0.5">
+                      {item.description}
                     </p>
-                    {item.description && (
-                      <p className="text-luxury-cream/30 text-xs font-inter font-light truncate mt-0.5">
-                        {item.description}
-                      </p>
-                    )}
-                  </div>
+                  )}
+                </div>
 
-                  {/* Price */}
-                  <span className="font-instrument text-luxury-gold text-lg whitespace-nowrap">
-                    {item.price}
-                  </span>
+                <span className="font-instrument text-luxury-gold text-lg whitespace-nowrap">
+                  {item.price}
+                </span>
 
-                  {/* Actions */}
-                  <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    <button
-                      onClick={() => openEdit(item)}
-                      className="w-8 h-8 border border-luxury-cream/10 flex items-center justify-center text-luxury-cream/40 hover:border-luxury-gold/50 hover:text-luxury-gold transition-all duration-200"
-                      aria-label="Düzenle"
-                    >
-                      <Pencil size={13} />
-                    </button>
-                    <button
-                      onClick={() => setDeleteTarget(item)}
-                      className="w-8 h-8 border border-luxury-cream/10 flex items-center justify-center text-luxury-cream/40 hover:border-red-400/50 hover:text-red-400 transition-all duration-200"
-                      aria-label="Sil"
-                    >
-                      <Trash2 size={13} />
-                    </button>
-                  </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </div>
+                <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  <button
+                    onClick={() => openEdit(item)}
+                    className="w-8 h-8 border border-luxury-cream/10 flex items-center justify-center text-luxury-cream/40 hover:border-luxury-gold/50 hover:text-luxury-gold transition-all duration-200"
+                    aria-label="Düzenle"
+                  >
+                    <Pencil size={13} />
+                  </button>
+                  <button
+                    onClick={() => setDeleteTarget(item)}
+                    className="w-8 h-8 border border-luxury-cream/10 flex items-center justify-center text-luxury-cream/40 hover:border-red-400/50 hover:text-red-400 transition-all duration-200"
+                    aria-label="Sil"
+                  >
+                    <Trash2 size={13} />
+                  </button>
+                </div>
+              </Reorder.Item>
+            ))}
+          </Reorder.Group>
         )}
       </main>
 
@@ -535,6 +584,53 @@ export default function AdminPage() {
                     className="flex-1 bg-red-500/80 text-white text-xs tracking-[0.2em] uppercase font-inter py-3 hover:bg-red-500 disabled:opacity-50 transition-colors"
                   >
                     {deleting ? 'Siliniyor…' : 'Sil'}
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Idle Warning Modal */}
+      <AnimatePresence>
+        {idleWarning && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-luxury-black/80 backdrop-blur-sm z-[200]"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.2 }}
+              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[200] w-full max-w-sm"
+            >
+              <div className="glass m-4 p-8 text-center border border-luxury-gold/20">
+                <div className="w-12 h-12 border border-luxury-gold/30 flex items-center justify-center mx-auto mb-5">
+                  <LogOut size={20} className="text-luxury-gold/60" />
+                </div>
+                <h3 className="font-instrument text-luxury-cream text-xl mb-2">
+                  Oturum Sona Eriyor
+                </h3>
+                <p className="text-luxury-cream/40 text-sm font-inter font-light mb-6">
+                  2 dakika hareketsizlik nedeniyle oturumunuz kapatılacak.
+                </p>
+                <div className="flex gap-3">
+                  <button
+                    onClick={resetIdleTimer}
+                    className="flex-1 bg-luxury-gold text-luxury-black text-xs tracking-[0.2em] uppercase font-inter font-medium py-3 hover:bg-luxury-gold-light transition-colors"
+                  >
+                    Devam Et
+                  </button>
+                  <button
+                    onClick={handleLogout}
+                    className="flex-1 border border-luxury-cream/10 text-luxury-cream/40 text-xs tracking-[0.2em] uppercase font-inter py-3 hover:border-luxury-cream/25 transition-colors"
+                  >
+                    Çıkış
                   </button>
                 </div>
               </div>

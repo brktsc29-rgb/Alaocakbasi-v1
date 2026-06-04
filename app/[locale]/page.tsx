@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
 import { LOCALES } from '@/locales/translations';
+import ErrorBoundary from '@/components/ErrorBoundary';
 
 const SmoothScroll = dynamic(() => import('@/components/SmoothScroll'), { ssr: false });
 const Cursor = dynamic(() => import('@/components/Cursor'), { ssr: false });
@@ -28,15 +29,15 @@ export default function LocalePage({ params }: { params: { locale: string } }) {
       <Cursor />
       <Navigation locale={params.locale} />
       <main>
-        <Hero />
-        <Story />
-        <SignatureDishes />
-        <ChefExperience />
-        <Gallery />
-        <MenuShowcase />
-        <WineRaki />
-        <Reservation />
-        <Location />
+        <ErrorBoundary><Hero /></ErrorBoundary>
+        <ErrorBoundary><Story /></ErrorBoundary>
+        <ErrorBoundary><SignatureDishes /></ErrorBoundary>
+        <ErrorBoundary><ChefExperience /></ErrorBoundary>
+        <ErrorBoundary><Gallery /></ErrorBoundary>
+        <ErrorBoundary><MenuShowcase /></ErrorBoundary>
+        <ErrorBoundary><WineRaki /></ErrorBoundary>
+        <ErrorBoundary><Reservation /></ErrorBoundary>
+        <ErrorBoundary><Location /></ErrorBoundary>
       </main>
       <Footer />
       <WhatsAppButton />

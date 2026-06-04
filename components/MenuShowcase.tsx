@@ -24,6 +24,7 @@ export default function MenuShowcase() {
   const [active, setActive] = useState<Category>('baslangic');
   const [items, setItems] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
   const tabs: { id: Category; label: string }[] = [
@@ -36,7 +37,11 @@ export default function MenuShowcase() {
   const fetchMenu = useCallback(async () => {
     try {
       const r = await fetch('/api/menu');
-      if (r.ok) setItems(await r.json());
+      if (!r.ok) throw new Error('fetch failed');
+      setItems(await r.json());
+      setFetchError(false);
+    } catch {
+      setFetchError(true);
     } finally {
       setLoading(false);
     }
@@ -94,6 +99,16 @@ export default function MenuShowcase() {
             {Array.from({ length: 4 }).map((_, i) => (
               <div key={i} className="h-14 bg-luxury-cream/[0.03] animate-pulse" />
             ))}
+          </div>
+        ) : fetchError ? (
+          <div className="text-center py-16 border border-dashed border-luxury-cream/10">
+            <p className="text-luxury-cream/25 text-sm font-inter mb-3">Menü yüklenemedi.</p>
+            <button
+              onClick={() => { setLoading(true); setFetchError(false); fetchMenu(); }}
+              className="text-luxury-gold/60 text-xs tracking-wider uppercase font-inter hover:text-luxury-gold transition-colors"
+            >
+              Tekrar Dene
+            </button>
           </div>
         ) : filtered.length === 0 ? (
           <p className="text-center text-luxury-cream/20 text-sm font-inter py-16">{t.menu_empty}</p>
