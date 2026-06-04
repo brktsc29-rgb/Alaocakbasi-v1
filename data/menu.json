@@ -1,0 +1,186 @@
+[
+  {
+    "id": "bs-1",
+    "category": "baslangic",
+    "name": "Lakerda",
+    "description": "Tuzlanmış torik balığı, lor peyniri, kapar, kırmızı soğan",
+    "price": "₺320",
+    "special": true
+  },
+  {
+    "id": "bs-2",
+    "category": "baslangic",
+    "name": "Midye Dolma",
+    "description": "Özel baharatlı pilavlı taze midye, limon",
+    "price": "₺280",
+    "special": false
+  },
+  {
+    "id": "bs-3",
+    "category": "baslangic",
+    "name": "Hünkar Beğendi",
+    "description": "Közlenmiş patlıcan püresi, kaşar, dana kavurma",
+    "price": "₺380",
+    "special": true
+  },
+  {
+    "id": "bs-4",
+    "category": "baslangic",
+    "name": "Sucuk Izgara",
+    "description": "Ev yapımı sığır sucuğu, közlenmiş kapya biber",
+    "price": "₺240",
+    "special": false
+  },
+  {
+    "id": "bs-5",
+    "category": "baslangic",
+    "name": "Zeytinyağlı Yaprak Sarma",
+    "description": "Asma yaprağı, basmati pilavı, fıstık, kuş üzümü",
+    "price": "₺220",
+    "special": false
+  },
+  {
+    "id": "bs-6",
+    "category": "baslangic",
+    "name": "Mezze Tabağı",
+    "description": "Şefin günlük seçkisi, 6 çeşit soğuk meze",
+    "price": "₺480",
+    "special": true
+  },
+  {
+    "id": "an-1",
+    "category": "ana",
+    "name": "Adana Ustabaşı",
+    "description": "El kıyması dana, özel yağ, közlenmiş biber",
+    "price": "₺680",
+    "special": true
+  },
+  {
+    "id": "an-2",
+    "category": "ana",
+    "name": "Kuzu Tandır",
+    "description": "18 saat marine, yavaş pişmiş kuzu but, yaban otları sosu",
+    "price": "₺920",
+    "special": true
+  },
+  {
+    "id": "an-3",
+    "category": "ana",
+    "name": "Beyti Sarma",
+    "description": "Dana kıyma, sarımsaklı yoğurt, tereyağlı domates sosu",
+    "price": "₺580",
+    "special": false
+  },
+  {
+    "id": "an-4",
+    "category": "ana",
+    "name": "Levrek Buğulama",
+    "description": "Taze levrek, zeytinyağı, kapari, zeytin, cherry domates",
+    "price": "₺760",
+    "special": false
+  },
+  {
+    "id": "an-5",
+    "category": "ana",
+    "name": "İskender Ustabaşı",
+    "description": "Dana döner, tereyağı, domates sosu, yoğurt",
+    "price": "₺620",
+    "special": false
+  },
+  {
+    "id": "an-6",
+    "category": "ana",
+    "name": "Bonfile",
+    "description": "250g AA grade dana bonfile, truffle tereyağı, sezonal garnitür",
+    "price": "₺1.200",
+    "special": true
+  },
+  {
+    "id": "tt-1",
+    "category": "tatli",
+    "name": "Künefe",
+    "description": "Taze tel kadayıf, eriyen beyaz peynir, gül şerbeti",
+    "price": "₺280",
+    "special": true
+  },
+  {
+    "id": "tt-2",
+    "category": "tatli",
+    "name": "Baklava Tabağı",
+    "description": "Özel Antep fıstıklı baklava, 4 çeşit",
+    "price": "₺320",
+    "special": false
+  },
+  {
+    "id": "tt-3",
+    "category": "tatli",
+    "name": "Sütlaç",
+    "description": "Fırında pişmiş sütlaç, safran, dövülmüş Antep fıstığı",
+    "price": "₺240",
+    "special": false
+  },
+  {
+    "id": "tt-4",
+    "category": "tatli",
+    "name": "Şekerpare",
+    "description": "İnce un şekerpare, irmik, kaymak",
+    "price": "₺220",
+    "special": false
+  },
+  {
+    "id": "tt-5",
+    "category": "tatli",
+    "name": "Dondurmalı Kadayıf",
+    "description": "Altın kadayıf, mastic dondurma, bal, çam fıstığı",
+    "price": "₺300",
+    "special": true
+  },
+  {
+    "id": "ic-1",
+    "category": "icecek",
+    "name": "Tekirdağ Gold",
+    "description": "Tekirdağ Altın Seri Rakı, 35cl",
+    "price": "₺380",
+    "special": false
+  },
+  {
+    "id": "ic-2",
+    "category": "icecek",
+    "name": "Yeni Rakı",
+    "description": "Klasik Yeni Rakı, 35cl",
+    "price": "₺280",
+    "special": false
+  },
+  {
+    "id": "ic-3",
+    "category": "icecek",
+    "name": "Kavaklidere Cuvée",
+    "description": "Türkiye'nin en prestijli şarabı, 2019",
+    "price": "₺480",
+    "special": true
+  },
+  {
+    "id": "ic-4",
+    "category": "icecek",
+    "name": "Vinkara Kalecik Karası",
+    "description": "Zarif kırmızı şarap, meşe aroması, 2020",
+    "price": "₺420",
+    "special": false
+  },
+  {
+    "id": "ic-5",
+    "category": "icecek",
+    "name": "Özel Kokteyller",
+    "description": "Şefin özel likör ve baharat seçkisi",
+    "price": "₺220",
+    "special": false
+  },
+  {
+    "id": "ic-6",
+    "category": "icecek",
+    "name": "Türk Çayı Servisi",
+    "description": "Demlik çay, Rize usulü",
+    "price": "₺80",
+    "special": false
+  }
+]
