@@ -67,8 +67,14 @@ export default function Footer() {
               </p>
             </div>
             <div className="flex gap-3 mt-6">
-              {[{ Icon: Instagram, label: 'Instagram' }, { Icon: Facebook, label: 'Facebook' }, { Icon: Twitter, label: 'Twitter' }].map(({ Icon, label }) => (
-                <a key={label} href="#" aria-label={label}
+              {[
+                { Icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/alaocakbasi' },
+                { Icon: Facebook,  label: 'Facebook',  href: '#' },
+                { Icon: Twitter,   label: 'Twitter',   href: '#' },
+              ].map(({ Icon, label, href }) => (
+                <a key={label} href={href} aria-label={label}
+                  target={href !== '#' ? '_blank' : undefined}
+                  rel={href !== '#' ? 'noopener noreferrer' : undefined}
                   className="w-8 h-8 border border-luxury-cream/10 flex items-center justify-center text-luxury-cream/30 hover:border-luxury-gold/40 hover:text-luxury-gold transition-all duration-300"
                 >
                   <Icon size={13} />

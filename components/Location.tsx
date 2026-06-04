@@ -64,7 +64,7 @@ export default function Location() {
 
             <div className="flex items-center gap-6 pt-8 border-t border-luxury-gold/10">
               <p className="text-luxury-cream/30 text-[9px] tracking-[0.3em] uppercase font-inter">{t.loc_follow}</p>
-              <a href="#" aria-label="Instagram"
+              <a href="https://www.instagram.com/alaocakbasi" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
                 className="w-10 h-10 border border-luxury-cream/10 flex items-center justify-center text-luxury-cream/40 hover:border-luxury-gold/40 hover:text-luxury-gold transition-all duration-300"
               >
                 <Instagram size={16} />
