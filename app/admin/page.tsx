@@ -270,7 +270,7 @@ export default function AdminPage() {
         <div className="flex items-end justify-between mb-8">
           <div>
             <p className="text-luxury-gold text-[10px] tracking-[0.4em] uppercase font-inter mb-2">
-              Yönetim Paneli · v2
+              Yönetim Paneli
             </p>
             <h1 className="font-instrument text-luxury-cream text-4xl">
               Menü Yönetimi
