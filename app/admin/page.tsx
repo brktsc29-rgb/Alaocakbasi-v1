@@ -164,7 +164,7 @@ export default function AdminPage() {
     try {
       // Auto-translate description to all 6 locales before saving
       let descriptions: Record<string, string> | undefined;
-      let translated = false;
+      let translateNote = '';
       if (form.description.trim()) {
         try {
           const tr = await fetch('/api/admin/translate', {
@@ -174,14 +174,16 @@ export default function AdminPage() {
           });
           if (tr.ok) {
             descriptions = await tr.json();
-            translated = true;
+            translateNote = ' · 6 dile çevrildi';
           } else {
-            const err = await tr.json().catch(() => ({})) as { error?: string };
-            if (err.error?.includes('ANTHROPIC_API_KEY')) {
-              setFormError('Çeviri yapılamadı: Vercel\'e ANTHROPIC_API_KEY eklenmemiş. Ürün Türkçe kaydedilecek.');
-            }
+            const body = await tr.json().catch(() => ({})) as { error?: string };
+            translateNote = body.error?.includes('ANTHROPIC_API_KEY')
+              ? ' · Çeviri yok (API key eksik)'
+              : ' · Çeviri başarısız';
           }
-        } catch { /* network error — proceed without translations */ }
+        } catch {
+          translateNote = ' · Çeviri başarısız';
+        }
       }
 
       const url = editItem ? `/api/menu/${editItem.id}` : '/api/menu';
@@ -199,7 +201,7 @@ export default function AdminPage() {
       await fetchItems();
       closeModal();
       const base = editItem ? 'Ürün güncellendi.' : 'Ürün eklendi.';
-      showToast(translated ? `${base} · 6 dile çevrildi` : base);
+      showToast(`${base}${translateNote}`);
     } catch (err) {
       setFormError(err instanceof Error ? err.message : 'Bir hata oluştu.');
     } finally {
