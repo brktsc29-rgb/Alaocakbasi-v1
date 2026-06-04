@@ -29,13 +29,21 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Dosya 8 MB\'dan büyük olamaz.' }, { status: 400 });
   }
 
+  if (!process.env.BLOB_READ_WRITE_TOKEN) {
+    return NextResponse.json({ error: 'BLOB_READ_WRITE_TOKEN eksik. Vercel → Storage → Blob mağazasını projeye bağlayın.' }, { status: 500 });
+  }
+
   try {
     const ext = file.name.split('.').pop() ?? 'jpg';
     const filename = `dishes/${Date.now()}.${ext}`;
-    const blob = await put(filename, file, { access: 'public' });
+    const blob = await put(filename, file, {
+      access: 'public',
+      token: process.env.BLOB_READ_WRITE_TOKEN,
+    });
     return NextResponse.json({ url: blob.url });
   } catch (err) {
-    console.error('Upload error:', err);
-    return NextResponse.json({ error: 'Yükleme başarısız. BLOB_READ_WRITE_TOKEN kontrol edin.' }, { status: 500 });
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error('Upload error:', msg);
+    return NextResponse.json({ error: msg }, { status: 500 });
   }
 }
