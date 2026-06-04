@@ -3,32 +3,33 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import MagneticButton from './ui/MagneticButton';
+import LanguageSwitcher from './LanguageSwitcher';
+import { useT } from '@/contexts/I18nContext';
+import type { Locale } from '@/locales/translations';
 
-const navLinks = [
-  { label: 'Hikayemiz', href: '#story' },
-  { label: 'Menü', href: '#menu' },
-  { label: 'Şef', href: '#chef' },
-  { label: 'Galeri', href: '#gallery' },
-  { label: 'İletişim', href: '#location' },
-];
-
-export default function Navigation() {
+export default function Navigation({ locale }: { locale: string }) {
+  const t = useT();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
 
+  const navLinks = [
+    { label: t.nav_story, href: '#story' },
+    { label: t.nav_menu, href: '#menu' },
+    { label: t.nav_chef, href: '#chef' },
+    { label: t.nav_gallery, href: '#gallery' },
+    { label: t.nav_contact, href: '#location' },
+  ];
+
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 60);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleNavClick = (href: string) => {
     setMobileOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -47,12 +48,8 @@ export default function Navigation() {
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
           <a
-            href="#"
+            href={`/${locale}`}
             className="flex items-center gap-3"
-            onClick={(e) => {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
           >
             <span className="font-instrument italic text-luxury-gold text-2xl tracking-wider">
               ALA
@@ -66,7 +63,7 @@ export default function Navigation() {
           {/* Desktop Links */}
           <ul className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
-              <li key={link.label}>
+              <li key={link.href}>
                 <button
                   onClick={() => handleNavClick(link.href)}
                   className="link-underline text-luxury-cream/60 hover:text-luxury-cream text-xs tracking-[0.2em] uppercase transition-colors duration-300 font-inter font-light"
@@ -77,37 +74,41 @@ export default function Navigation() {
             ))}
           </ul>
 
-          {/* CTA */}
-          <div className="hidden lg:block">
+          {/* Right: Language Switcher + CTA */}
+          <div className="hidden lg:flex items-center gap-5">
+            <LanguageSwitcher currentLocale={locale as Locale} />
             <MagneticButton
               variant="outline"
               href="#reservation"
               onClick={() => handleNavClick('#reservation')}
               className="text-xs py-3 px-6"
             >
-              Rezervasyon
+              {t.nav_reservation}
             </MagneticButton>
           </div>
 
-          {/* Mobile Hamburger */}
-          <button
-            className="lg:hidden flex flex-col gap-1.5 p-2"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Menüyü aç"
-          >
-            <motion.span
-              animate={mobileOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-              className="block w-6 h-px bg-luxury-gold transition-all duration-300"
-            />
-            <motion.span
-              animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
-              className="block w-6 h-px bg-luxury-gold transition-all duration-300"
-            />
-            <motion.span
-              animate={mobileOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-              className="block w-6 h-px bg-luxury-gold transition-all duration-300"
-            />
-          </button>
+          {/* Mobile: language + hamburger */}
+          <div className="lg:hidden flex items-center gap-4">
+            <LanguageSwitcher currentLocale={locale as Locale} />
+            <button
+              className="flex flex-col gap-1.5 p-2"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Menüyü aç"
+            >
+              <motion.span
+                animate={mobileOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+                className="block w-6 h-px bg-luxury-gold"
+              />
+              <motion.span
+                animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
+                className="block w-6 h-px bg-luxury-gold"
+              />
+              <motion.span
+                animate={mobileOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+                className="block w-6 h-px bg-luxury-gold"
+              />
+            </button>
+          </div>
         </div>
       </motion.nav>
 
@@ -123,7 +124,7 @@ export default function Navigation() {
           >
             {navLinks.map((link, i) => (
               <motion.button
-                key={link.label}
+                key={link.href}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.08 }}
@@ -143,7 +144,7 @@ export default function Navigation() {
                 href="#reservation"
                 onClick={() => handleNavClick('#reservation')}
               >
-                Rezervasyon
+                {t.nav_reservation}
               </MagneticButton>
             </motion.div>
           </motion.div>

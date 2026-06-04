@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useT } from '@/contexts/I18nContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,18 +19,19 @@ interface MenuItem {
   special: boolean;
 }
 
-const tabs: { id: Category; label: string }[] = [
-  { id: 'baslangic', label: 'Başlangıç' },
-  { id: 'ana', label: 'Ana Yemek' },
-  { id: 'tatli', label: 'Tatlı' },
-  { id: 'icecek', label: 'İçecek' },
-];
-
 export default function MenuShowcase() {
+  const t = useT();
   const [active, setActive] = useState<Category>('baslangic');
   const [items, setItems] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(true);
   const sectionRef = useRef<HTMLElement>(null);
+
+  const tabs: { id: Category; label: string }[] = [
+    { id: 'baslangic', label: t.menu_tab_starter },
+    { id: 'ana',       label: t.menu_tab_main },
+    { id: 'tatli',     label: t.menu_tab_dessert },
+    { id: 'icecek',    label: t.menu_tab_drinks },
+  ];
 
   const fetchMenu = useCallback(async () => {
     try {
@@ -40,23 +42,13 @@ export default function MenuShowcase() {
     }
   }, []);
 
-  useEffect(() => {
-    fetchMenu();
-  }, [fetchMenu]);
+  useEffect(() => { fetchMenu(); }, [fetchMenu]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        '.menu-header',
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1.2,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: '.menu-header', start: 'top 85%' },
-        }
-      );
+      gsap.fromTo('.menu-header', { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out',
+          scrollTrigger: { trigger: '.menu-header', start: 'top 85%' } });
     }, sectionRef);
     return () => ctx.revert();
   }, []);
@@ -64,54 +56,39 @@ export default function MenuShowcase() {
   const filtered = items.filter((i) => i.category === active);
 
   return (
-    <section
-      ref={sectionRef}
-      id="menu"
+    <section ref={sectionRef} id="menu"
       className="relative bg-luxury-black py-32 md:py-40 overflow-hidden"
     >
-      {/* Background pattern */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-30"
-        style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(212,175,55,0.06) 1px, transparent 0)`,
-          backgroundSize: '40px 40px',
-        }}
-      />
+      <div className="absolute inset-0 pointer-events-none opacity-30"
+        style={{ backgroundImage: `radial-gradient(circle at 1px 1px, rgba(212,175,55,0.06) 1px, transparent 0)`, backgroundSize: '40px 40px' }} />
 
       <div className="max-w-5xl mx-auto px-6">
-        {/* Header */}
         <div className="menu-header text-center mb-16 opacity-0">
           <p className="text-luxury-gold text-[10px] tracking-[0.5em] uppercase mb-6 font-inter">
-            Menü
+            {t.menu_eyebrow}
           </p>
           <h2 className="font-instrument text-5xl md:text-6xl lg:text-7xl text-luxury-cream">
-            Her Tabak
+            {t.menu_h1}
             <br />
-            <span className="italic text-luxury-gold">Bir Hikaye</span>
+            <span className="italic text-luxury-gold">{t.menu_h2}</span>
           </h2>
           <div className="w-16 h-px bg-luxury-gold/40 mx-auto mt-8" />
         </div>
 
-        {/* Tabs */}
         <div className="flex items-center justify-center gap-0 mb-16 overflow-x-auto">
           {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActive(tab.id)}
+            <button key={tab.id} onClick={() => setActive(tab.id)}
               className={`px-6 py-3 text-xs tracking-[0.2em] uppercase font-inter transition-all duration-300 border-b whitespace-nowrap
-                ${
-                  active === tab.id
-                    ? 'text-luxury-gold border-luxury-gold'
-                    : 'text-luxury-cream/40 border-luxury-cream/10 hover:text-luxury-cream/70'
-                }
-              `}
+                ${active === tab.id
+                  ? 'text-luxury-gold border-luxury-gold'
+                  : 'text-luxury-cream/40 border-luxury-cream/10 hover:text-luxury-cream/70'
+                }`}
             >
               {tab.label}
             </button>
           ))}
         </div>
 
-        {/* Menu Items */}
         {loading ? (
           <div className="space-y-4">
             {Array.from({ length: 4 }).map((_, i) => (
@@ -119,32 +96,23 @@ export default function MenuShowcase() {
             ))}
           </div>
         ) : filtered.length === 0 ? (
-          <p className="text-center text-luxury-cream/20 text-sm font-inter py-16">
-            Bu kategoride henüz ürün eklenmedi.
-          </p>
+          <p className="text-center text-luxury-cream/20 text-sm font-inter py-16">{t.menu_empty}</p>
         ) : (
           <AnimatePresence mode="wait">
-            <motion.div
-              key={active}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4, ease: 'easeOut' }}
+            <motion.div key={active}
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.4, ease: 'easeOut' }}
               className="space-y-0"
             >
               {filtered.map((item, i) => (
-                <motion.div
-                  key={item.id}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
+                <motion.div key={item.id}
+                  initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.06 }}
                   className="flex items-baseline justify-between gap-4 py-5 border-b border-luxury-cream/5 group hover:bg-luxury-gold/[0.03] transition-colors duration-300 px-2 -mx-2"
                 >
                   <div className="flex items-baseline gap-4 flex-1 min-w-0">
                     <div className="flex items-center gap-2 shrink-0">
-                      {item.special && (
-                        <span className="w-1.5 h-1.5 rounded-full bg-luxury-gold shrink-0" />
-                      )}
+                      {item.special && <span className="w-1.5 h-1.5 rounded-full bg-luxury-gold shrink-0" />}
                       <h4 className="font-instrument text-luxury-cream group-hover:text-luxury-gold transition-colors duration-300 text-xl">
                         {item.name}
                       </h4>
@@ -157,9 +125,7 @@ export default function MenuShowcase() {
                         {item.description}
                       </p>
                     )}
-                    <span className="font-instrument text-luxury-gold text-lg whitespace-nowrap">
-                      {item.price}
-                    </span>
+                    <span className="font-instrument text-luxury-gold text-lg whitespace-nowrap">{item.price}</span>
                   </div>
                 </motion.div>
               ))}
@@ -167,9 +133,8 @@ export default function MenuShowcase() {
           </AnimatePresence>
         )}
 
-        {/* Bottom note */}
         <p className="text-center text-luxury-cream/20 text-[10px] tracking-widest uppercase font-inter mt-16">
-          Fiyatlara KDV dahildir · Sezonluk ürün bulunabilirliği değişebilir
+          {t.menu_footnote}
         </p>
       </div>
     </section>

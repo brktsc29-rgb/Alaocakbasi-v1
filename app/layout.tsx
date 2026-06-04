@@ -18,26 +18,15 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "ALA Ocakbaşı — Akdeniz'in Kalbinde Ateşin ve Lezzetin Buluştuğu Yer",
-  description:
-    "Antalya Şirinyalı'nda, Akdeniz mutfağının en seçkin lezzetlerini sunan ALA Ocakbaşı. Açık ateş üzerinde pişirilen imza yemekler, özel şarap koleksiyonu ve eşsiz bir deneyim.",
-  keywords: 'ALA Ocakbaşı, Antalya restoran, Akdeniz mutfağı, fine dining, kebap, ocakbaşı, lüks restoran, Muratpaşa',
-  openGraph: {
-    title: 'ALA Ocakbaşı',
-    description: 'Akdeniz\'in Kalbinde Ateşin ve Lezzetin Buluştuğu Yer',
-    type: 'website',
-  },
+  title: 'ALA Ocakbaşı',
+  description: 'Fine Dining · Antalya',
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
-      lang="tr"
       className={`${instrumentSerif.variable} ${inter.variable}`}
+      suppressHydrationWarning
     >
       <body className="bg-luxury-black text-luxury-cream font-inter antialiased">
         {children}
