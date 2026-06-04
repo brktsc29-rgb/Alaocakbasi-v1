@@ -9,7 +9,7 @@ function isAdmin(req: NextRequest): boolean {
 
 export async function GET() {
   try {
-    const items = readMenu();
+    const items = await readMenu();
     return NextResponse.json(items);
   } catch {
     return NextResponse.json({ error: 'Menü yüklenemedi.' }, { status: 500 });
@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Eksik alan.' }, { status: 400 });
     }
 
-    const items = readMenu();
+    const items = await readMenu();
     const newItem = {
       id: generateId(),
       category,
@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
     };
 
     items.push(newItem);
-    writeMenu(items);
+    await writeMenu(items);
 
     return NextResponse.json(newItem, { status: 201 });
   } catch (err) {

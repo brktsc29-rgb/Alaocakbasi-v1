@@ -17,7 +17,7 @@ export async function PUT(
 
   try {
     const body = await req.json();
-    const items = readMenu();
+    const items = await readMenu();
     const idx = items.findIndex((i) => i.id === params.id);
 
     if (idx === -1) {
@@ -33,7 +33,7 @@ export async function PUT(
       special: body.special !== undefined ? Boolean(body.special) : items[idx].special,
     };
 
-    writeMenu(items);
+    await writeMenu(items);
     return NextResponse.json(items[idx]);
   } catch (err) {
     console.error('PUT /api/menu/[id] error:', err);
@@ -50,14 +50,14 @@ export async function DELETE(
   }
 
   try {
-    const items = readMenu();
+    const items = await readMenu();
     const filtered = items.filter((i) => i.id !== params.id);
 
     if (filtered.length === items.length) {
       return NextResponse.json({ error: 'Bulunamadı.' }, { status: 404 });
     }
 
-    writeMenu(filtered);
+    await writeMenu(filtered);
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error('DELETE /api/menu/[id] error:', err);
