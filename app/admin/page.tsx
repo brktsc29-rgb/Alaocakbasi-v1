@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence, Reorder } from 'framer-motion';
-import { Plus, Pencil, Trash2, LogOut, Star, X, Check, AlertTriangle, GripVertical, Wine } from 'lucide-react';
+import { Plus, Pencil, Trash2, LogOut, Star, X, Check, AlertTriangle, GripVertical, Wine, UtensilsCrossed, ImageIcon } from 'lucide-react';
 
 interface MenuItem {
   id: string;
@@ -27,9 +27,25 @@ interface DrinkItem {
   grape?: string;
 }
 
+interface SignatureDish {
+  id: string;
+  name: string;
+  price: string;
+  subtitle: string;
+  description: string;
+  tag: string;
+  image: string;
+}
+
+const EMPTY_SIGNATURE_FORM: Omit<SignatureDish, 'id'> = {
+  name: '', price: '', subtitle: '', description: '', tag: '', image: '',
+};
+
+const MAX_SIGNATURE = 4;
+
 type Category = 'baslangic' | 'ana' | 'tatli' | 'icecek';
 type DrinkType = 'raki' | 'wine';
-type Section = 'menu' | 'drinks';
+type Section = 'menu' | 'drinks' | 'signature';
 
 const CATEGORIES: { id: Category; label: string }[] = [
   { id: 'baslangic', label: 'Başlangıç' },
@@ -95,6 +111,17 @@ export default function AdminPage() {
   const [drinkDeleteTarget, setDrinkDeleteTarget] = useState<DrinkItem | null>(null);
   const [drinkDeleting, setDrinkDeleting] = useState(false);
 
+  // ── Signature state ───────────────────────────────────────────────────────────
+  const [sigDishes, setSigDishes] = useState<SignatureDish[]>([]);
+  const [sigLoading, setSigLoading] = useState(true);
+  const [sigModalOpen, setSigModalOpen] = useState(false);
+  const [editSig, setEditSig] = useState<SignatureDish | null>(null);
+  const [sigForm, setSigForm] = useState<Omit<SignatureDish, 'id'>>(EMPTY_SIGNATURE_FORM);
+  const [sigSaving, setSigSaving] = useState(false);
+  const [sigFormError, setSigFormError] = useState('');
+  const [sigDeleteTarget, setSigDeleteTarget] = useState<SignatureDish | null>(null);
+  const [sigDeleting, setSigDeleting] = useState(false);
+
   // ── Toast ─────────────────────────────────────────────────────────────────────
   const [toast, setToast] = useState<{ msg: string; ok: boolean } | null>(null);
 
@@ -134,12 +161,24 @@ export default function AdminPage() {
     }
   }, []);
 
+  // ── Signature fetch ───────────────────────────────────────────────────────────
+  const fetchSignature = useCallback(async () => {
+    setSigLoading(true);
+    try {
+      const r = await fetch('/api/signature');
+      if (!r.ok) throw new Error();
+      setSigDishes(await r.json());
+    } finally {
+      setSigLoading(false);
+    }
+  }, []);
+
   useEffect(() => {
     fetch('/api/auth/check').then((r) => {
       if (!r.ok) router.replace('/admin/login');
-      else { fetchItems(); fetchDrinks(); }
+      else { fetchItems(); fetchDrinks(); fetchSignature(); }
     });
-  }, [router, fetchItems, fetchDrinks]);
+  }, [router, fetchItems, fetchDrinks, fetchSignature]);
 
   // ── Idle ──────────────────────────────────────────────────────────────────────
   const resetIdleTimer = useCallback(() => {
@@ -340,6 +379,51 @@ export default function AdminPage() {
     }
   };
 
+  // ── Signature CRUD ────────────────────────────────────────────────────────────
+  const openSigAdd = () => { setEditSig(null); setSigForm(EMPTY_SIGNATURE_FORM); setSigFormError(''); setSigModalOpen(true); };
+  const openSigEdit = (d: SignatureDish) => { setEditSig(d); setSigForm({ name: d.name, price: d.price, subtitle: d.subtitle, description: d.description, tag: d.tag, image: d.image }); setSigFormError(''); setSigModalOpen(true); };
+  const closeSigModal = () => { setSigModalOpen(false); setEditSig(null); setSigFormError(''); };
+
+  const handleSigSave = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!sigForm.name.trim() || !sigForm.price.trim()) { setSigFormError('İsim ve fiyat zorunludur.'); return; }
+    setSigSaving(true);
+    setSigFormError('');
+    try {
+      const url = editSig ? `/api/signature/${editSig.id}` : '/api/signature';
+      const method = editSig ? 'PUT' : 'POST';
+      const r = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(sigForm) });
+      if (!r.ok) {
+        let msg = 'Kayıt sırasında bir hata oluştu.';
+        try { msg = (await r.json()).error ?? msg; } catch { /* non-JSON */ }
+        throw new Error(msg);
+      }
+      await fetchSignature();
+      closeSigModal();
+      showToast(editSig ? 'Güncellendi.' : 'Eklendi.');
+    } catch (err) {
+      setSigFormError(err instanceof Error ? err.message : 'Bir hata oluştu.');
+    } finally {
+      setSigSaving(false);
+    }
+  };
+
+  const handleSigDelete = async () => {
+    if (!sigDeleteTarget) return;
+    setSigDeleting(true);
+    try {
+      const r = await fetch(`/api/signature/${sigDeleteTarget.id}`, { method: 'DELETE' });
+      if (!r.ok) throw new Error();
+      await fetchSignature();
+      setSigDeleteTarget(null);
+      showToast('Silindi.');
+    } catch {
+      showToast('Silme işlemi başarısız.', false);
+    } finally {
+      setSigDeleting(false);
+    }
+  };
+
   const filtered = items.filter((i) => i.category === activeTab);
   const filteredDrinks = drinks.filter((d) => d.type === drinkTab);
 
@@ -389,7 +473,7 @@ export default function AdminPage() {
         <div className="flex items-end justify-between mb-8">
           <div>
             <p className="text-luxury-gold text-[10px] tracking-[0.4em] uppercase font-inter mb-2">Yönetim Paneli</p>
-            <div className="flex items-center gap-1 mb-1">
+            <div className="flex items-center gap-1 mb-1 flex-wrap">
               <button
                 onClick={() => setSection('menu')}
                 className={`font-instrument text-3xl transition-colors duration-200 ${section === 'menu' ? 'text-luxury-cream' : 'text-luxury-cream/25 hover:text-luxury-cream/50'}`}
@@ -404,14 +488,23 @@ export default function AdminPage() {
                 <Wine size={22} className="inline-block" />
                 Şarap & Rakı
               </button>
+              <span className="font-instrument text-luxury-cream/20 text-3xl mx-2">/</span>
+              <button
+                onClick={() => setSection('signature')}
+                className={`font-instrument text-3xl transition-colors duration-200 flex items-center gap-2 ${section === 'signature' ? 'text-luxury-cream' : 'text-luxury-cream/25 hover:text-luxury-cream/50'}`}
+              >
+                <UtensilsCrossed size={22} className="inline-block" />
+                İmza Yemekler
+              </button>
             </div>
           </div>
           <button
-            onClick={section === 'menu' ? openAdd : openDrinkAdd}
-            className="flex items-center gap-2 bg-luxury-gold text-luxury-black text-xs tracking-[0.2em] uppercase font-inter font-medium px-5 py-3 hover:bg-luxury-gold-light transition-colors duration-200"
+            onClick={section === 'menu' ? openAdd : section === 'drinks' ? openDrinkAdd : openSigAdd}
+            disabled={section === 'signature' && sigDishes.length >= MAX_SIGNATURE}
+            className="flex items-center gap-2 bg-luxury-gold text-luxury-black text-xs tracking-[0.2em] uppercase font-inter font-medium px-5 py-3 hover:bg-luxury-gold-light disabled:opacity-40 disabled:cursor-not-allowed transition-colors duration-200"
           >
             <Plus size={14} />
-            {section === 'menu' ? 'Yeni Ürün Ekle' : 'Yeni Ekle'}
+            {section === 'menu' ? 'Yeni Ürün Ekle' : section === 'drinks' ? 'Yeni Ekle' : `Yemek Ekle ${sigDishes.length}/${MAX_SIGNATURE}`}
           </button>
         </div>
 
@@ -556,6 +649,69 @@ export default function AdminPage() {
                   </Reorder.Item>
                 ))}
               </Reorder.Group>
+            )}
+          </>
+        )}
+        {/* ── SIGNATURE SECTION ────────────────────────────────────────────────── */}
+        {section === 'signature' && (
+          <>
+            <div className="grid grid-cols-2 gap-3 mb-8">
+              <div className="border border-luxury-cream/5 bg-luxury-surface/30 p-4">
+                <p className="text-luxury-cream/25 text-[9px] tracking-[0.3em] uppercase font-inter mb-1">Mevcut</p>
+                <p className="font-instrument text-luxury-gold text-2xl">{sigDishes.length}</p>
+                <p className="text-luxury-cream/20 text-[9px] font-inter mt-0.5">yemek</p>
+              </div>
+              <div className="border border-luxury-cream/5 bg-luxury-surface/30 p-4">
+                <p className="text-luxury-cream/25 text-[9px] tracking-[0.3em] uppercase font-inter mb-1">Maksimum</p>
+                <p className="font-instrument text-luxury-gold text-2xl">{MAX_SIGNATURE}</p>
+                <p className="text-luxury-cream/20 text-[9px] font-inter mt-0.5">yemek</p>
+              </div>
+            </div>
+
+            {sigLoading ? (
+              <div className="text-center py-20 text-luxury-cream/20 text-sm font-inter tracking-wider">Yükleniyor…</div>
+            ) : sigDishes.length === 0 ? (
+              <div className="text-center py-20 border border-dashed border-luxury-cream/10">
+                <p className="text-luxury-cream/25 text-sm font-inter mb-4">Henüz imza yemek eklenmedi.</p>
+                <button onClick={openSigAdd} className="text-luxury-gold text-xs tracking-wider uppercase font-inter hover:underline">İlk yemeği ekle</button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {sigDishes.map((dish) => (
+                  <div key={dish.id}
+                    className="flex gap-4 bg-luxury-surface/40 border border-luxury-cream/5 hover:border-luxury-gold/20 p-4 group transition-colors duration-200"
+                  >
+                    <div className="relative w-20 h-20 shrink-0 overflow-hidden bg-luxury-black">
+                      {dish.image ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={dish.image} alt={dish.name} className="w-full h-full object-cover" />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-luxury-cream/15">
+                          <ImageIcon size={20} />
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-instrument text-luxury-cream text-lg leading-tight truncate">{dish.name}</p>
+                      {dish.subtitle && (
+                        <p className="text-luxury-cream/30 text-[10px] tracking-[0.2em] uppercase font-inter mt-0.5">{dish.subtitle}</p>
+                      )}
+                      <p className="text-luxury-cream/30 text-xs font-inter font-light truncate mt-1">{dish.description}</p>
+                      <p className="font-instrument text-luxury-gold text-base mt-1">{dish.price}</p>
+                    </div>
+                    <div className="flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shrink-0">
+                      <button onClick={() => openSigEdit(dish)}
+                        className="w-8 h-8 border border-luxury-cream/10 flex items-center justify-center text-luxury-cream/40 hover:border-luxury-gold/50 hover:text-luxury-gold transition-all duration-200" aria-label="Düzenle">
+                        <Pencil size={13} />
+                      </button>
+                      <button onClick={() => setSigDeleteTarget(dish)}
+                        className="w-8 h-8 border border-luxury-cream/10 flex items-center justify-center text-luxury-cream/40 hover:border-red-400/50 hover:text-red-400 transition-all duration-200" aria-label="Sil">
+                        <Trash2 size={13} />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
             )}
           </>
         )}
@@ -788,6 +944,120 @@ export default function AdminPage() {
                   <button onClick={handleDrinkDelete} disabled={drinkDeleting}
                     className="flex-1 bg-red-500/80 text-white text-xs tracking-[0.2em] uppercase font-inter py-3 hover:bg-red-500 disabled:opacity-50 transition-colors">
                     {drinkDeleting ? 'Siliniyor…' : 'Sil'}
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* ── Signature Add/Edit Modal ─────────────────────────────────────────── */}
+      <AnimatePresence>
+        {sigModalOpen && (
+          <>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-luxury-black/80 backdrop-blur-sm z-50" onClick={closeSigModal} />
+            <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }} transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none"
+            >
+              <div className="glass w-full max-w-lg max-h-[90dvh] overflow-y-auto relative pointer-events-auto">
+                <div className="absolute top-0 left-0 w-6 h-6 border-t border-l border-luxury-gold/40" />
+                <div className="absolute top-0 right-0 w-6 h-6 border-t border-r border-luxury-gold/40" />
+                <div className="absolute bottom-0 left-0 w-6 h-6 border-b border-l border-luxury-gold/40" />
+                <div className="absolute bottom-0 right-0 w-6 h-6 border-b border-r border-luxury-gold/40" />
+                <div className="p-6 sm:p-8">
+                  <button type="button" onClick={closeSigModal}
+                    className="absolute top-4 right-4 text-luxury-cream/30 hover:text-luxury-cream/70 transition-colors" aria-label="Kapat">
+                    <X size={18} />
+                  </button>
+                  <h2 className="font-instrument text-luxury-cream text-2xl mb-6">{editSig ? 'İmza Yemeği Düzenle' : 'İmza Yemek Ekle'}</h2>
+                  <form onSubmit={handleSigSave} noValidate className="space-y-5">
+                    <div>
+                      <label className="text-luxury-gold/50 text-[9px] tracking-[0.3em] uppercase font-inter block mb-2">Yemek Adı *</label>
+                      <input type="text" value={sigForm.name} onChange={(e) => setSigForm({ ...sigForm, name: e.target.value })}
+                        placeholder="Örn: Adana Ustabaşı" className="luxury-input text-sm" />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="text-luxury-gold/50 text-[9px] tracking-[0.3em] uppercase font-inter block mb-2">Kısa Başlık</label>
+                        <input type="text" value={sigForm.subtitle} onChange={(e) => setSigForm({ ...sigForm, subtitle: e.target.value })}
+                          placeholder="Örn: İmza Kebap" className="luxury-input text-sm" />
+                      </div>
+                      <div>
+                        <label className="text-luxury-gold/50 text-[9px] tracking-[0.3em] uppercase font-inter block mb-2">Etiket</label>
+                        <input type="text" value={sigForm.tag} onChange={(e) => setSigForm({ ...sigForm, tag: e.target.value })}
+                          placeholder="Örn: Şef Seçkisi" className="luxury-input text-sm" />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="text-luxury-gold/50 text-[9px] tracking-[0.3em] uppercase font-inter block mb-2">Açıklama</label>
+                      <textarea value={sigForm.description} onChange={(e) => setSigForm({ ...sigForm, description: e.target.value })}
+                        placeholder="Malzemeler ve hazırlanış…" rows={3} className="luxury-input text-sm resize-none" />
+                    </div>
+                    <div>
+                      <label className="text-luxury-gold/50 text-[9px] tracking-[0.3em] uppercase font-inter block mb-2">Fiyat *</label>
+                      <input type="text" value={sigForm.price}
+                        onChange={(e) => { let val = e.target.value; if (val && !val.startsWith('₺')) val = '₺' + val; setSigForm({ ...sigForm, price: val }); }}
+                        placeholder="₺0" className="luxury-input text-sm" />
+                    </div>
+                    <div>
+                      <label className="text-luxury-gold/50 text-[9px] tracking-[0.3em] uppercase font-inter block mb-2">Görsel URL</label>
+                      <input type="text" value={sigForm.image} onChange={(e) => setSigForm({ ...sigForm, image: e.target.value })}
+                        placeholder="https://…" className="luxury-input text-sm" />
+                      {sigForm.image && (
+                        <div className="mt-3 relative w-full h-32 overflow-hidden border border-luxury-cream/10">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={sigForm.image} alt="Önizleme" className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                        </div>
+                      )}
+                    </div>
+                    {sigFormError && <p className="text-red-400/80 text-xs font-inter">{sigFormError}</p>}
+                    <div className="flex gap-3 pt-2">
+                      <button type="button" onClick={closeSigModal}
+                        className="flex-1 border border-luxury-cream/10 text-luxury-cream/40 text-xs tracking-[0.2em] uppercase font-inter py-3 hover:border-luxury-cream/25 transition-colors duration-200">
+                        İptal
+                      </button>
+                      <button type="submit" disabled={sigSaving}
+                        className="flex-1 bg-luxury-gold text-luxury-black text-xs tracking-[0.2em] uppercase font-inter font-medium py-3 hover:bg-luxury-gold-light disabled:opacity-50 transition-colors duration-200">
+                        {sigSaving ? 'Kaydediliyor…' : editSig ? 'Güncelle' : 'Ekle'}
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* ── Signature Delete Confirm ──────────────────────────────────────────── */}
+      <AnimatePresence>
+        {sigDeleteTarget && (
+          <>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-luxury-black/80 backdrop-blur-sm z-50" onClick={() => setSigDeleteTarget(null)} />
+            <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }} transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none"
+            >
+              <div className="glass w-full max-w-sm p-8 text-center border border-red-400/20 pointer-events-auto">
+                <div className="w-12 h-12 border border-red-400/30 flex items-center justify-center mx-auto mb-5">
+                  <Trash2 size={20} className="text-red-400" />
+                </div>
+                <h3 className="font-instrument text-luxury-cream text-xl mb-2">Emin misiniz?</h3>
+                <p className="text-luxury-cream/40 text-sm font-inter font-light mb-6">
+                  <strong className="text-luxury-cream/70">{sigDeleteTarget.name}</strong> silinecek. Bu işlem geri alınamaz.
+                </p>
+                <div className="flex gap-3">
+                  <button onClick={() => setSigDeleteTarget(null)}
+                    className="flex-1 border border-luxury-cream/10 text-luxury-cream/40 text-xs tracking-[0.2em] uppercase font-inter py-3 hover:border-luxury-cream/25 transition-colors">
+                    İptal
+                  </button>
+                  <button onClick={handleSigDelete} disabled={sigDeleting}
+                    className="flex-1 bg-red-500/80 text-white text-xs tracking-[0.2em] uppercase font-inter py-3 hover:bg-red-500 disabled:opacity-50 transition-colors">
+                    {sigDeleting ? 'Siliniyor…' : 'Sil'}
                   </button>
                 </div>
               </div>

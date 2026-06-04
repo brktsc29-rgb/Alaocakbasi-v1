@@ -1,0 +1,38 @@
+[
+  {
+    "id": "s1",
+    "name": "Adana Ustabaşı",
+    "price": "₺680",
+    "subtitle": "İmza Kebap",
+    "description": "El kıyması dana eti, özel baharatlı yağ, közlenmiş biber ve taze otlarla hazırlanan şef imzalı kebap.",
+    "tag": "Şef Seçkisi",
+    "image": "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "s2",
+    "name": "Kuzu Tandır",
+    "price": "₺920",
+    "subtitle": "Özel Hazırlık",
+    "description": "18 saat marine edilmiş kuzu but, yaban otları ve kırmızı şarap sosuyla yavaş pişirilmiş tandır.",
+    "tag": "Saatlerce Hazırlık",
+    "image": "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "s3",
+    "name": "Hünkar Beğendi",
+    "price": "₺480",
+    "subtitle": "Osmanlı Mirası",
+    "description": "Közlenmiş patlıcan püresi, kaşar peyniri ve üzerinde dana kavurmasıyla sunulan Osmanlı klasiği.",
+    "tag": "Geleneksel",
+    "image": "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "s4",
+    "name": "Levrek Buğulama",
+    "price": "₺760",
+    "subtitle": "Akdeniz Lezzeti",
+    "description": "Ege sularından taze levrek, zeytinyağı, kapari, zeytin ve cherry domatesiyle buğulamada.",
+    "tag": "Günlük Taze",
+    "image": "https://images.unsplash.com/photo-1481931098730-318b6f776db0?q=80&w=800&auto=format&fit=crop"
+  }
+]

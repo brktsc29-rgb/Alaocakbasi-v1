@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
@@ -9,23 +9,29 @@ import { useT } from '@/contexts/I18nContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const IMAGES = [
-  'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?q=80&w=800&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=800&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1481931098730-318b6f776db0?q=80&w=800&auto=format&fit=crop',
-];
+interface SignatureDish {
+  id: string;
+  name: string;
+  price: string;
+  subtitle: string;
+  description: string;
+  tag: string;
+  image: string;
+}
+
+const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop';
 
 export default function SignatureDishes() {
   const t = useT();
   const sectionRef = useRef<HTMLElement>(null);
+  const [dishes, setDishes] = useState<SignatureDish[]>([]);
 
-  const dishes = [
-    { name: 'Adana Ustabaşı', price: '₺680', subtitle: t.dish1_sub, description: t.dish1_desc, tag: t.tag_chef },
-    { name: 'Kuzu Tandır',    price: '₺920', subtitle: t.dish2_sub, description: t.dish2_desc, tag: t.tag_slow },
-    { name: 'Hünkar Beğendi', price: '₺480', subtitle: t.dish3_sub, description: t.dish3_desc, tag: t.tag_traditional },
-    { name: 'Levrek Buğulama',price: '₺760', subtitle: t.dish4_sub, description: t.dish4_desc, tag: t.tag_fresh },
-  ];
+  useEffect(() => {
+    fetch('/api/signature')
+      .then((r) => r.ok ? r.json() : [])
+      .then(setDishes)
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -38,7 +44,7 @@ export default function SignatureDishes() {
           scrollTrigger: { trigger: '.dishes-grid', start: 'top 80%' } });
     }, sectionRef);
     return () => ctx.revert();
-  }, []);
+  }, [dishes]);
 
   return (
     <section ref={sectionRef} id="dishes"
@@ -59,23 +65,31 @@ export default function SignatureDishes() {
         </div>
 
         <div className="dishes-grid grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-          {dishes.map((dish, i) => (
-            <motion.div key={dish.name}
+          {dishes.map((dish) => (
+            <motion.div key={dish.id}
               className="dish-card opacity-0 relative overflow-hidden bg-luxury-black group cursor-pointer"
               whileHover={{ y: -8 }} transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
               <div className="relative overflow-hidden aspect-[3/4]">
-                <Image src={IMAGES[i]} alt={dish.name} fill
+                <Image
+                  src={dish.image || FALLBACK_IMAGE}
+                  alt={dish.name}
+                  fill
                   className="object-cover scale-100 group-hover:scale-110 transition-transform duration-700 ease-out"
-                  sizes="(max-width:768px) 100vw, (max-width:1200px) 50vw, 25vw" />
+                  sizes="(max-width:768px) 100vw, (max-width:1200px) 50vw, 25vw"
+                />
                 <div className="dish-card-overlay absolute inset-0" />
-                <div className="absolute top-4 left-4 glass px-3 py-1">
-                  <span className="text-luxury-gold text-[9px] tracking-[0.3em] uppercase font-inter">{dish.tag}</span>
-                </div>
+                {dish.tag && (
+                  <div className="absolute top-4 left-4 glass px-3 py-1">
+                    <span className="text-luxury-gold text-[9px] tracking-[0.3em] uppercase font-inter">{dish.tag}</span>
+                  </div>
+                )}
                 <div className="absolute inset-0 border border-luxury-gold/0 group-hover:border-luxury-gold/40 transition-all duration-500" />
               </div>
               <div className="p-6">
-                <p className="text-luxury-gold/60 text-[10px] tracking-[0.3em] uppercase font-inter mb-2">{dish.subtitle}</p>
+                {dish.subtitle && (
+                  <p className="text-luxury-gold/60 text-[10px] tracking-[0.3em] uppercase font-inter mb-2">{dish.subtitle}</p>
+                )}
                 <h3 className="font-instrument text-luxury-cream text-2xl leading-tight mb-3 group-hover:text-luxury-gold transition-colors duration-300">
                   {dish.name}
                 </h3>
