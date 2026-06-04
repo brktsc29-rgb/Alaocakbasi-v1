@@ -5,11 +5,11 @@
 @tailwind utilities;
 
 :root {
-  --bg: #0A0A0A;
-  --surface: #111111;
-  --gold: #D4AF37;
-  --gold-light: #E8C94A;
-  --cream: #F5F0E8;
+  --bg: #081A0C;
+  --surface: #0C2214;
+  --gold: #C9A227;
+  --gold-light: #DDB84A;
+  --cream: #F0ECD8;
 }
 
 * {
@@ -23,8 +23,8 @@ html {
 }
 
 body {
-  background: #0A0A0A;
-  color: #F5F0E8;
+  background: #081A0C;
+  color: #F0ECD8;
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
   cursor: none;
@@ -36,27 +36,27 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0A0A0A;
+  background: #081A0C;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #D4AF37;
+  background: #C9A227;
   border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #E8C94A;
+  background: #DDB84A;
 }
 
 /* Selection */
 ::selection {
-  background: rgba(212, 175, 55, 0.3);
-  color: #F5F0E8;
+  background: rgba(201, 162, 39, 0.3);
+  color: #F0ECD8;
 }
 
 /* Gold gradient text utility */
 .gold-text {
-  background: linear-gradient(135deg, #D4AF37 0%, #E8C94A 50%, #D4AF37 100%);
+  background: linear-gradient(135deg, #C9A227 0%, #DDB84A 50%, #C9A227 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -64,17 +64,17 @@ body {
 
 /* Glass morphism */
 .glass {
-  background: rgba(17, 17, 17, 0.7);
+  background: rgba(8, 26, 12, 0.75);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(201, 162, 39, 0.18);
 }
 
 .glass-light {
-  background: rgba(245, 240, 232, 0.05);
+  background: rgba(240, 236, 216, 0.05);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(245, 240, 232, 0.1);
+  border: 1px solid rgba(240, 236, 216, 0.1);
 }
 
 /* Fire background animation */
@@ -125,15 +125,15 @@ body {
 .gold-line {
   width: 100%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+  background: linear-gradient(90deg, transparent, #C9A227, transparent);
 }
 
 /* Dish card overlay */
 .dish-card-overlay {
   background: linear-gradient(
     to top,
-    rgba(10, 10, 10, 0.95) 0%,
-    rgba(10, 10, 10, 0.6) 40%,
+    rgba(8, 26, 12, 0.95) 0%,
+    rgba(8, 26, 12, 0.6) 40%,
     transparent 100%
   );
 }
@@ -142,9 +142,9 @@ body {
 .luxury-input {
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+  border-bottom: 1px solid rgba(201, 162, 39, 0.3);
   outline: none;
-  color: #F5F0E8;
+  color: #F0ECD8;
   font-family: 'Inter', sans-serif;
   font-weight: 300;
   width: 100%;
@@ -153,11 +153,11 @@ body {
 }
 
 .luxury-input:focus {
-  border-bottom-color: #D4AF37;
+  border-bottom-color: #C9A227;
 }
 
 .luxury-input::placeholder {
-  color: rgba(245, 240, 232, 0.3);
+  color: rgba(240, 236, 216, 0.3);
   font-weight: 300;
   letter-spacing: 0.1em;
   font-size: 0.8rem;
@@ -166,15 +166,15 @@ body {
 
 /* Menu tab active state */
 .menu-tab-active {
-  color: #D4AF37;
-  border-bottom: 1px solid #D4AF37;
+  color: #C9A227;
+  border-bottom: 1px solid #C9A227;
 }
 
 /* Cursor styles */
 #custom-cursor {
   width: 12px;
   height: 12px;
-  background: #D4AF37;
+  background: #C9A227;
   border-radius: 50%;
   position: fixed;
   top: 0;
@@ -189,7 +189,7 @@ body {
 #custom-cursor-follower {
   width: 36px;
   height: 36px;
-  border: 1px solid rgba(212, 175, 55, 0.5);
+  border: 1px solid rgba(201, 162, 39, 0.5);
   border-radius: 50%;
   position: fixed;
   top: 0;
@@ -232,7 +232,7 @@ body:hover #custom-cursor {
   left: 0;
   width: 0;
   height: 1px;
-  background: #D4AF37;
+  background: #C9A227;
   transition: width 0.3s ease;
 }
 
@@ -266,7 +266,7 @@ body:hover #custom-cursor {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(212, 175, 55, 0.06),
+    rgba(201, 162, 39, 0.06),
     transparent
   );
   transform: rotate(45deg);

@@ -9,11 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'luxury-black': '#0A0A0A',
-        'luxury-surface': '#111111',
-        'luxury-gold': '#D4AF37',
-        'luxury-gold-light': '#E8C94A',
-        'luxury-cream': '#F5F0E8',
+        'luxury-black': '#081A0C',
+        'luxury-surface': '#0C2214',
+        'luxury-gold': '#C9A227',
+        'luxury-gold-light': '#DDB84A',
+        'luxury-cream': '#F0ECD8',
       },
       fontFamily: {
         instrument: ['"Instrument Serif"', 'serif'],
