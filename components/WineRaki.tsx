@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
@@ -9,18 +9,17 @@ import { useT } from '@/contexts/I18nContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const raki = [
-  { name: 'Tekirdağ Altın Seri', region: 'Tekirdağ, Türkiye', note: 'Anason, meyan kökü, tatlı amber', year: '—', price: '₺380', featured: true },
-  { name: 'Yeni Rakı Klasik',    region: 'İstanbul, Türkiye', note: 'Saf anason, hafif tatlı, uzun bitiş', year: '—', price: '₺280' },
-  { name: 'Efe Zeybek',          region: 'İzmir, Türkiye',   note: 'Doğal üzüm, çiçeksi anason aroması', year: '—', price: '₺320' },
-];
-
-const wines = [
-  { name: 'Kavaklidere Cuvée Blanc',  region: 'Ankara Bağları, Türkiye', grape: 'Narince, Emir',                  note: 'Elma, armut, çiçek, hafif asidite',       year: '2021', price: '₺480', featured: true },
-  { name: 'Vinkara Kalecik Karası',   region: 'Ankara, Türkiye',         grape: 'Kalecik Karası',                 note: 'Kiraz, baharatlı meşe, yumuşak tanin',    year: '2020', price: '₺420' },
-  { name: 'Pamukkale Kalecik',        region: 'Denizli, Türkiye',        grape: 'Kalecik Karası, Cabernet',       note: 'Erik, vişne, karabiber, uzun bitiş',      year: '2019', price: '₺360' },
-  { name: 'Lucien Arkas Grand Cru',   region: 'İzmir, Türkiye',          grape: 'Cabernet Sauvignon, Syrah',      note: 'Koyu meyve, deri, tütün, derin yapı',    year: '2018', price: '₺680', featured: true },
-];
+interface DrinkItem {
+  id: string;
+  type: 'raki' | 'wine';
+  name: string;
+  region: string;
+  note: string;
+  year: string;
+  price: string;
+  featured: boolean;
+  grape?: string;
+}
 
 function SelectionCard({ name, region, note, year, price, featured, extra, delay, recommendedLabel }: {
   name: string; region: string; note: string; year: string; price: string;
@@ -62,6 +61,14 @@ function SelectionCard({ name, region, note, year, price, featured, extra, delay
 export default function WineRaki() {
   const t = useT();
   const sectionRef = useRef<HTMLElement>(null);
+  const [drinks, setDrinks] = useState<DrinkItem[]>([]);
+
+  useEffect(() => {
+    fetch('/api/drinks')
+      .then((r) => r.ok ? r.json() : [])
+      .then(setDrinks)
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -71,6 +78,9 @@ export default function WineRaki() {
     }, sectionRef);
     return () => ctx.revert();
   }, []);
+
+  const raki = drinks.filter((d) => d.type === 'raki');
+  const wines = drinks.filter((d) => d.type === 'wine');
 
   return (
     <section ref={sectionRef} id="wine"
@@ -109,7 +119,7 @@ export default function WineRaki() {
             </div>
             <div className="space-y-4">
               {raki.map((item, i) => (
-                <SelectionCard key={item.name} {...item} delay={i * 0.1} recommendedLabel={t.wine_recommended} />
+                <SelectionCard key={item.id} {...item} delay={i * 0.1} recommendedLabel={t.wine_recommended} />
               ))}
             </div>
           </div>
@@ -122,7 +132,7 @@ export default function WineRaki() {
             </div>
             <div className="space-y-4">
               {wines.map((item, i) => (
-                <SelectionCard key={item.name} {...item} extra={item.grape} delay={i * 0.1 + 0.2} recommendedLabel={t.wine_recommended} />
+                <SelectionCard key={item.id} {...item} extra={item.grape} delay={i * 0.1 + 0.2} recommendedLabel={t.wine_recommended} />
               ))}
             </div>
           </div>

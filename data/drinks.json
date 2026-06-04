@@ -1,0 +1,9 @@
+[
+  { "id": "d1", "type": "raki", "name": "Tekirdağ Altın Seri", "region": "Tekirdağ, Türkiye", "note": "Anason, meyan kökü, tatlı amber", "year": "—", "price": "₺380", "featured": true },
+  { "id": "d2", "type": "raki", "name": "Yeni Rakı Klasik",    "region": "İstanbul, Türkiye", "note": "Saf anason, hafif tatlı, uzun bitiş",  "year": "—", "price": "₺280", "featured": false },
+  { "id": "d3", "type": "raki", "name": "Efe Zeybek",          "region": "İzmir, Türkiye",   "note": "Doğal üzüm, çiçeksi anason aroması", "year": "—", "price": "₺320", "featured": false },
+  { "id": "d4", "type": "wine", "name": "Kavaklidere Cuvée Blanc", "region": "Ankara Bağları, Türkiye", "grape": "Narince, Emir",             "note": "Elma, armut, çiçek, hafif asidite",    "year": "2021", "price": "₺480", "featured": true  },
+  { "id": "d5", "type": "wine", "name": "Vinkara Kalecik Karası",  "region": "Ankara, Türkiye",         "grape": "Kalecik Karası",            "note": "Kiraz, baharatlı meşe, yumuşak tanin", "year": "2020", "price": "₺420", "featured": false },
+  { "id": "d6", "type": "wine", "name": "Pamukkale Kalecik",       "region": "Denizli, Türkiye",        "grape": "Kalecik Karası, Cabernet",  "note": "Erik, vişne, karabiber, uzun bitiş",   "year": "2019", "price": "₺360", "featured": false },
+  { "id": "d7", "type": "wine", "name": "Lucien Arkas Grand Cru",  "region": "İzmir, Türkiye",          "grape": "Cabernet Sauvignon, Syrah", "note": "Koyu meyve, deri, tütün, derin yapı",  "year": "2018", "price": "₺680", "featured": true  }
+]
