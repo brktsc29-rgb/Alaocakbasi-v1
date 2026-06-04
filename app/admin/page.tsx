@@ -177,12 +177,14 @@ export default function AdminPage() {
             translateNote = ' · 6 dile çevrildi';
           } else {
             const body = await tr.json().catch(() => ({})) as { error?: string };
-            translateNote = body.error?.includes('ANTHROPIC_API_KEY')
-              ? ' · Çeviri yok (API key eksik)'
-              : ' · Çeviri başarısız';
+            if (body.error?.includes('ANTHROPIC_API_KEY')) {
+              translateNote = ' · Çeviri yok (API key eksik)';
+            } else {
+              translateNote = ` · Çeviri başarısız: ${body.error ?? tr.status}`;
+            }
           }
-        } catch {
-          translateNote = ' · Çeviri başarısız';
+        } catch (e) {
+          translateNote = ` · Çeviri başarısız: ${e instanceof Error ? e.message : 'ağ hatası'}`;
         }
       }
 
