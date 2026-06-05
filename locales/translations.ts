@@ -134,6 +134,7 @@ export interface Translations {
   footer_finedining: string;
   footer_privacy: string;
   footer_terms: string;
+  footer_dev_cta: string;
 }
 
 // ─── TURKISH ──────────────────────────────────────────────────────────────────
@@ -207,6 +208,7 @@ const tr: Translations = {
   footer_pages: 'Sayfalar', footer_contact: 'İletişim',
   footer_copy: 'Tüm Hakları Saklıdır', footer_finedining: 'Fine Dining · Antalya · Turkey',
   footer_privacy: 'Gizlilik Politikası', footer_terms: 'Kullanım Koşulları',
+  footer_dev_cta: 'Bu siteyi siz de yaptırın',
 };
 
 // ─── ENGLISH ──────────────────────────────────────────────────────────────────
@@ -280,6 +282,7 @@ const en: Translations = {
   footer_pages: 'Pages', footer_contact: 'Contact',
   footer_copy: 'All Rights Reserved', footer_finedining: 'Fine Dining · Antalya · Turkey',
   footer_privacy: 'Privacy Policy', footer_terms: 'Terms of Use',
+  footer_dev_cta: 'Get a website like this',
 };
 
 // ─── GERMAN ───────────────────────────────────────────────────────────────────
@@ -353,6 +356,7 @@ const de: Translations = {
   footer_pages: 'Seiten', footer_contact: 'Kontakt',
   footer_copy: 'Alle Rechte vorbehalten', footer_finedining: 'Fine Dining · Antalya · Türkei',
   footer_privacy: 'Datenschutzrichtlinie', footer_terms: 'Nutzungsbedingungen',
+  footer_dev_cta: 'Diese Website für sich gestalten lassen',
 };
 
 // ─── ARABIC ───────────────────────────────────────────────────────────────────
@@ -426,6 +430,7 @@ const ar: Translations = {
   footer_pages: 'الصفحات', footer_contact: 'تواصل معنا',
   footer_copy: 'جميع الحقوق محفوظة', footer_finedining: 'مطعم فاخر · أنطاليا · تركيا',
   footer_privacy: 'سياسة الخصوصية', footer_terms: 'شروط الاستخدام',
+  footer_dev_cta: 'احصل على موقع مثل هذا',
 };
 
 // ─── RUSSIAN ──────────────────────────────────────────────────────────────────
@@ -499,6 +504,7 @@ const ru: Translations = {
   footer_pages: 'Страницы', footer_contact: 'Контакты',
   footer_copy: 'Все права защищены', footer_finedining: 'Изысканная кухня · Анталья · Турция',
   footer_privacy: 'Политика конфиденциальности', footer_terms: 'Условия использования',
+  footer_dev_cta: 'Закажите сайт как этот',
 };
 
 // ─── FRENCH ───────────────────────────────────────────────────────────────────
@@ -572,6 +578,7 @@ const fr: Translations = {
   footer_pages: 'Pages', footer_contact: 'Contact',
   footer_copy: 'Tous droits réservés', footer_finedining: 'Fine Dining · Antalya · Turquie',
   footer_privacy: 'Politique de confidentialité', footer_terms: 'Conditions d\'utilisation',
+  footer_dev_cta: 'Faites créer un site comme celui-ci',
 };
 
 // ─── Lookup ───────────────────────────────────────────────────────────────────
