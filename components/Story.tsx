@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
+import storyImage from '@/public/story-bg.jpg';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
@@ -56,7 +57,7 @@ export default function Story() {
           <div className="absolute -top-4 -left-4 w-full h-full border border-luxury-gold/20 pointer-events-none z-10"
             style={{ transform: 'translate(8px,8px)' }} />
           <div className="story-image-inner relative overflow-hidden aspect-[3/4]">
-            <Image src="/story-bg.jpg"
+            <Image src={storyImage}
               alt="ÂLÂ Ocakbaşı" fill className="object-cover scale-110" sizes="(max-width:768px) 100vw, 50vw" />
             <div className="absolute inset-0 bg-gradient-to-t from-luxury-black/60 via-luxury-black/10 to-transparent" />
           </div>
