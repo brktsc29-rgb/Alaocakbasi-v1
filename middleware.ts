@@ -18,11 +18,13 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // ── Skip internal Next.js routes and API ─────────────────────
+  // ── Skip internal Next.js routes, API and static files ───────
   if (
     pathname.startsWith('/api') ||
     pathname.startsWith('/_next') ||
-    pathname.startsWith('/favicon')
+    pathname.startsWith('/favicon') ||
+    pathname === '/sitemap.xml' ||
+    pathname === '/robots.txt'
   ) {
     return NextResponse.next();
   }
