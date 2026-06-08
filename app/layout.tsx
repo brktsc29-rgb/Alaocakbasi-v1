@@ -20,6 +20,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'ÂLÂ Ocakbaşı',
   description: 'Fine Dining · Antalya',
+  metadataBase: new URL('https://www.alaocakbasi.com.tr'),
   verification: {
     google: '_iisCXTGsbDCjDMAyllxo3FAvxGFt_vroYju0x7Mi_w',
   },
