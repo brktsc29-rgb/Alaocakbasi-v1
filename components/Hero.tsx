@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
 import MagneticButton from './ui/MagneticButton';
 import { useT } from '@/contexts/I18nContext';
@@ -110,12 +111,21 @@ export default function Hero() {
     <section ref={sectionRef} id="hero"
       className="relative w-full h-screen min-h-screen overflow-hidden flex items-center justify-center"
     >
+      {/* Background photo */}
       <div className="absolute inset-0 bg-luxury-black" />
+      <Image
+        src="/hero-bg.jpg"
+        alt="ÂLÂ Ocakbaşı"
+        fill
+        priority
+        className="object-cover object-center"
+        style={{ opacity: 0.45 }}
+        sizes="100vw"
+      />
+      {/* Overlays */}
+      <div className="absolute inset-0 bg-gradient-to-b from-luxury-black/70 via-luxury-black/30 to-luxury-black/85 pointer-events-none" />
       <div className="absolute inset-0 fire-ambient" />
-      <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 60% 40% at 20% 80%, rgba(150,80,10,0.15) 0%, transparent 60%)' }} />
-      <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 50% 35% at 80% 85%, rgba(130,70,8,0.12) 0%, transparent 55%)' }} />
       <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" style={{ mixBlendMode: 'screen' }} aria-hidden="true" />
-      <div className="absolute inset-0 bg-gradient-to-b from-luxury-black/80 via-transparent to-luxury-black/90 pointer-events-none" />
 
       <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 w-full">
         <p className="hero-eyebrow opacity-0 text-luxury-gold text-[10px] tracking-[0.4em] uppercase mb-10 font-inter font-light">
