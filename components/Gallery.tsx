@@ -7,6 +7,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { X, ZoomIn } from 'lucide-react';
 import { useT } from '@/contexts/I18nContext';
+import storyImage from '@/public/story-bg.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,7 +15,7 @@ const images = [
   { src: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1200&auto=format&fit=crop', span: 'col-span-2 row-span-2' },
   { src: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop', span: '' },
   { src: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=800&auto=format&fit=crop', span: '' },
-  { src: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1200&auto=format&fit=crop', span: 'col-span-2' },
+  { src: storyImage.src, span: 'col-span-2' },
   { src: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?q=80&w=800&auto=format&fit=crop', span: '' },
   { src: 'https://images.unsplash.com/photo-1481931098730-318b6f776db0?q=80&w=800&auto=format&fit=crop', span: '' },
 ];
