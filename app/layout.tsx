@@ -20,6 +20,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'ÂLÂ Ocakbaşı',
   description: 'Fine Dining · Antalya',
+  verification: {
+    google: '_iisCXTGsbDCjDMAyllxo3FAvxGFt_vroYju0x7Mi_w',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
