@@ -56,7 +56,7 @@ export default function Story() {
           <div className="absolute -top-4 -left-4 w-full h-full border border-luxury-gold/20 pointer-events-none z-10"
             style={{ transform: 'translate(8px,8px)' }} />
           <div className="story-image-inner relative overflow-hidden aspect-[3/4]">
-            <Image src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1200&auto=format&fit=crop"
+            <Image src="/story-bg.jpg"
               alt="ÂLÂ Ocakbaşı" fill className="object-cover scale-110" sizes="(max-width:768px) 100vw, 50vw" />
             <div className="absolute inset-0 bg-gradient-to-t from-luxury-black/60 via-luxury-black/10 to-transparent" />
           </div>
